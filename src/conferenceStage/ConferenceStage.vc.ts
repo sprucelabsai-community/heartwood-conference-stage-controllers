@@ -68,5 +68,3 @@ export type ConferenceStageViewControllerOptions = Omit<
     ConferenceStage,
     'setAddParticipantSurfaceHandler' | 'setLeaveHandler'
 >
-
-module

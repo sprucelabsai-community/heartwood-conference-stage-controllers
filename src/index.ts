@@ -7,3 +7,8 @@ declare module '@sprucelabs/heartwood-view-controllers/build/.spruce/schemas/sch
         }
     }
 }
+
+export * from './conferenceStage.types'
+export { default as ConferenceStageViewController } from './conferenceStage/ConferenceStage.vc'
+export * from './conferenceStage/ConferenceStage.vc'
+export { default as MockParticipantSurface } from './participantSurface/MockParticipantSurface'
