@@ -8,7 +8,7 @@ import {
     OnJoinOptions,
     SurfaceRenderer,
 } from '../../conferenceStage.types'
-import ParticipantSurfaceImpl from '../../participantSurface/ParticipantSurface'
+import MockParticipantSurface from '../../participantSurface/MockParticipantSurface'
 
 @suite()
 export default class ConferenceStageViewControllerTest extends AbstractSpruceFixtureTest {
@@ -84,7 +84,7 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
     ) {
         const model = this.render()
         let passedOptions: AddParticipantSurfaceOptions | undefined
-        const surface = new ParticipantSurfaceImpl()
+        const surface = new MockParticipantSurface()
 
         model.setAddParticipantSurfaceHandler(async (options) => {
             passedOptions = options

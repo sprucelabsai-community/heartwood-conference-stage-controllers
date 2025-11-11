@@ -24,6 +24,7 @@ export default class ConferenceStageViewController extends AbstractViewControlle
 
         this.model = {
             ...removeUniversalViewOptions(options),
+            controller: this,
             setAddParticipantSurfaceHandler: async (handler) => {
                 this.addParticipantSurfaceHandler = handler
             },
@@ -67,3 +68,5 @@ export type ConferenceStageViewControllerOptions = Omit<
     ConferenceStage,
     'setAddParticipantSurfaceHandler' | 'setLeaveHandler'
 >
+
+module

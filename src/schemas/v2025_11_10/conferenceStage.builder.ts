@@ -6,9 +6,18 @@ export default buildSchema({
     importsWhenLocal: [
         'import * as ConferenceStageTypes from "../../conferenceStage.types"',
     ],
+    importsWhenRemote: [
+        'import * as ConferenceStageTypes from "@sprucelabsai-community/heartwood-conference-stage-controllers/build/types/conferenceStage.types"',
+    ],
     fields: {
         id: {
             type: 'id',
+        },
+        controller: {
+            type: 'raw',
+            options: {
+                valueType: 'ConferenceStageTypes.ConferenceStageViewController',
+            },
         },
         onJoin: {
             type: 'raw',

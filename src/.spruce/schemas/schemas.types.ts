@@ -5,12 +5,7 @@
 
 export { SpruceSchemas } from '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schemas.types'
 
-import { default as SchemaEntity } from '@sprucelabs/schema'
-
-
-
 import * as SpruceSchema from '@sprucelabs/schema'
-
 import * as ConferenceStageTypes from "../../conferenceStage.types"
 
 declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schemas.types' {
@@ -23,6 +18,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			
 				
 				'id'?: string | undefined | null
+				
+				'controller'?: (ConferenceStageTypes.ConferenceStageViewController) | undefined | null
 				
 				'onJoin'?: (ConferenceStageTypes.OnJoinHandler) | undefined | null
 				
@@ -44,11 +41,17 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			version: 'v2025_11_10',
 			namespace: 'ConferenceStageControllers',
 			name: 'Conference Stage',
+			importsWhenRemote: ['import * as ConferenceStageTypes from "@sprucelabsai-community/heartwood-conference-stage-controllers/build/types/conferenceStage.types"',],
 			    fields: {
 			            /** . */
 			            'id': {
 			                type: 'id',
 			                options: undefined
+			            },
+			            /** . */
+			            'controller': {
+			                type: 'raw',
+			                options: {valueType: `ConferenceStageTypes.ConferenceStageViewController`,}
 			            },
 			            /** . */
 			            'onJoin': {
@@ -90,7 +93,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		interface ConferenceStageEntity extends SchemaEntity<SpruceSchemas.ConferenceStageControllers.v2025_11_10.ConferenceStageSchema> {}
 
 	}
 

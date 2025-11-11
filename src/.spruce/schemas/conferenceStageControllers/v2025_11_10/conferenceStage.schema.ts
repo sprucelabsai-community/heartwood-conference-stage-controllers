@@ -8,11 +8,17 @@ const conferenceStageSchema: SpruceSchemas.ConferenceStageControllers.v2025_11_1
 	version: 'v2025_11_10',
 	namespace: 'ConferenceStageControllers',
 	name: 'Conference Stage',
+	importsWhenRemote: ['import * as ConferenceStageTypes from "@sprucelabsai-community/heartwood-conference-stage-controllers/build/types/conferenceStage.types"',],
 	    fields: {
 	            /** . */
 	            'id': {
 	                type: 'id',
 	                options: undefined
+	            },
+	            /** . */
+	            'controller': {
+	                type: 'raw',
+	                options: {valueType: `ConferenceStageTypes.ConferenceStageViewController`,}
 	            },
 	            /** . */
 	            'onJoin': {

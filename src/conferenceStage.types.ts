@@ -1,5 +1,7 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
 
+export { default as ConferenceStageViewController } from './conferenceStage/ConferenceStage.vc'
+
 export type OnJoinHandler = (options: OnJoinOptions) => Promise<void>
 export type OnDeviceChangeHandler = (
     options: OnDeviceChangeOptions
