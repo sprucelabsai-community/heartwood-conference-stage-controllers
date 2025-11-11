@@ -1,6 +1,6 @@
 {
   "name": "@sprucelabs/heartwood-conference-stage-controllers",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "files": [
     "build"
   ],
