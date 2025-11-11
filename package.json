@@ -29,6 +29,7 @@
     "update.dependencies": "yarn run clean.dependencies && yarn",
     "resolve-paths.lint": "yarn run build.resolve-paths ; yarn run lint",
     "test": "jest",
+    "release": "semantic-release",
     "watch.build.dev": "tsc-watch --sourceMap --onCompilationComplete 'yarn run post.watch.build'",
     "watch.rebuild": "yarn run clean.all && yarn install && yarn run watch.build.dev",
     "watch.tsc": "tsc -w"
