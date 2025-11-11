@@ -5,7 +5,12 @@
 
 export { SpruceSchemas } from '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schemas.types'
 
+import { default as SchemaEntity } from '@sprucelabs/schema'
+
+
+
 import * as SpruceSchema from '@sprucelabs/schema'
+
 import * as ConferenceStageTypes from "../../conferenceStage.types"
 
 declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schemas.types' {
@@ -26,6 +31,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onLeave'?: (() => Promise<void>) | undefined | null
 				
 				'onDeviceChange'?: (ConferenceStageTypes.OnDeviceChangeHandler) | undefined | null
+				
+				'onDeviceError'?: (ConferenceStageTypes.OnDeviceErrorHandler) | undefined | null
 				
 				'setAddParticipantSurfaceHandler': (ConferenceStageTypes.SetAddParticipantSurfaceHandler)
 				
@@ -69,6 +76,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                options: {valueType: `ConferenceStageTypes.OnDeviceChangeHandler`,}
 			            },
 			            /** . */
+			            'onDeviceError': {
+			                type: 'raw',
+			                options: {valueType: `ConferenceStageTypes.OnDeviceErrorHandler`,}
+			            },
+			            /** . */
 			            'setAddParticipantSurfaceHandler': {
 			                type: 'raw',
 			                isRequired: true,
@@ -93,6 +105,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
+		interface ConferenceStageEntity extends SchemaEntity<SpruceSchemas.ConferenceStageControllers.v2025_11_10.ConferenceStageSchema> {}
 
 	}
 

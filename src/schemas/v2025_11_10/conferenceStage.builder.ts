@@ -37,6 +37,12 @@ export default buildSchema({
                 valueType: 'ConferenceStageTypes.OnDeviceChangeHandler',
             },
         },
+        onDeviceError: {
+            type: 'raw',
+            options: {
+                valueType: 'ConferenceStageTypes.OnDeviceErrorHandler',
+            },
+        },
         setAddParticipantSurfaceHandler: {
             type: 'raw',
             isRequired: true,

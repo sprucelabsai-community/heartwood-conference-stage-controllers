@@ -43,3 +43,5 @@ export type ConferenceStage =
     SpruceSchemas.ConferenceStageControllers.v2025_11_10.ConferenceStage
 
 export type ConnectionStatus = NonNullable<ConferenceStage['connectionStatus']>
+
+export type OnDeviceErrorHandler = (error: Error) => Promise<void> | void

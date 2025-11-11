@@ -36,6 +36,11 @@ const conferenceStageSchema: SpruceSchemas.ConferenceStageControllers.v2025_11_1
 	                options: {valueType: `ConferenceStageTypes.OnDeviceChangeHandler`,}
 	            },
 	            /** . */
+	            'onDeviceError': {
+	                type: 'raw',
+	                options: {valueType: `ConferenceStageTypes.OnDeviceErrorHandler`,}
+	            },
+	            /** . */
 	            'setAddParticipantSurfaceHandler': {
 	                type: 'raw',
 	                isRequired: true,

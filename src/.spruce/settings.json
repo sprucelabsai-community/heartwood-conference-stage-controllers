@@ -10,7 +10,8 @@
     "schema",
     "permission",
     "event",
-    "view"
+    "view",
+    "error"
   ],
   "dependencies": [
     {
