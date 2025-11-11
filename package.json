@@ -1,8 +1,16 @@
 {
   "name": "@sprucelabs/heartwood-conference-stage-controllers",
   "version": "0.0.1",
+  "files": [
+    "build"
+  ],
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "module": "./build/esm/index.js",
+  "sideEffects": false,
   "scripts": {
     "build.ci": "yarn run build.tsc && yarn run build.resolve-paths && yarn run lint",
+    "build.dist": "tsc --project tsconfig.dist.json && yarn build.resolve-paths && mv build esm && yarn build.esm-postbuild && yarn build.tsc && yarn build.resolve-paths && mv esm build/ && yarn clean.dist",
     "build.dev": "yarn run build.tsc --sourceMap ; yarn run resolve-paths.lint",
     "build.copy-files": "mkdir -p build && rsync -avzq --exclude='*.ts' ./src/ ./build/",
     "build.resolve-paths": "resolve-path-aliases --target build --patterns '**/*.js,**/*.d.ts'",
