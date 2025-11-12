@@ -1,4 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
+import SpruceError from './errors/SpruceError'
 
 export { default as ConferenceStageViewController } from './conferenceStage/ConferenceStage.vc'
 
@@ -44,4 +45,4 @@ export type ConferenceStage =
 
 export type ConnectionStatus = NonNullable<ConferenceStage['connectionStatus']>
 
-export type OnDeviceErrorHandler = (error: Error) => Promise<void> | void
+export type OnDeviceErrorHandler = (error: SpruceError) => Promise<void> | void
