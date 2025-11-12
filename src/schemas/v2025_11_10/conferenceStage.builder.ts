@@ -43,12 +43,10 @@ export default buildSchema({
                 valueType: 'ConferenceStageTypes.OnDeviceErrorHandler',
             },
         },
-        setAddParticipantSurfaceHandler: {
+        criticalError: {
             type: 'raw',
-            isRequired: true,
             options: {
-                valueType:
-                    'ConferenceStageTypes.SetAddParticipantSurfaceHandler',
+                valueType: 'Error',
             },
         },
         connectionStatus: {
@@ -74,13 +72,23 @@ export default buildSchema({
                 ],
             },
         },
-        criticalError: {
+
+        setAddParticipantSurfaceHandler: {
             type: 'raw',
+            isRequired: true,
             options: {
-                valueType: 'Error',
+                valueType:
+                    'ConferenceStageTypes.SetAddParticipantSurfaceHandler',
             },
         },
-        setLeaveHandler: {
+        setEnterConferenceHandler: {
+            type: 'raw',
+            isRequired: true,
+            options: {
+                valueType: '(handler: () => void) => void',
+            },
+        },
+        setLeaveConferenceHandler: {
             type: 'raw',
             isRequired: true,
             options: {

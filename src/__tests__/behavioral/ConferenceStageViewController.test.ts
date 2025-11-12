@@ -129,13 +129,15 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
 
     @test()
     protected async leaveCallsOnLeaveInViewModel() {
-        const { setLeaveHandler } = this.render()
+        const { setLeaveConferenceHandler } = this.render()
         let wasHit = false
-        setLeaveHandler(() => {
+        setLeaveConferenceHandler(() => {
             wasHit = true
         })
 
-        this.leave()
+        assert.isFalse(wasHit, 'onLeave handler was hit too early')
+
+        this.leaveConference()
 
         assert.isTrue(
             wasHit,
@@ -153,6 +155,24 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
         vcAssert.assertTriggerRenderCount(this.vc, 3)
     }
 
+    @test()
+    protected async canEnterConference() {
+        const { setEnterConferenceHandler } = this.render()
+        let wasHit = false
+        setEnterConferenceHandler(async () => {
+            wasHit = true
+        })
+
+        assert.isFalse(wasHit, 'enterConference handler was hit too early')
+
+        this.vc.enterConference()
+
+        assert.isTrue(
+            wasHit,
+            'enterConference handler was not called when calling enterConference on vc'
+        )
+    }
+
     private clearCriticalError() {
         this.vc.clearCriticalError()
     }
@@ -161,8 +181,8 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
         this.vc.setConnectionStatus(status)
     }
 
-    private leave() {
-        this.vc.leave()
+    private leaveConference() {
+        this.vc.leaveConference()
     }
 
     private setCriticalError(err: Error) {

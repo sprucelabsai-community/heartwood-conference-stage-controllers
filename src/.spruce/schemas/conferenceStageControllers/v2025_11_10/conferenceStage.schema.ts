@@ -41,10 +41,9 @@ const conferenceStageSchema: SpruceSchemas.ConferenceStageControllers.v2025_11_1
 	                options: {valueType: `ConferenceStageTypes.OnDeviceErrorHandler`,}
 	            },
 	            /** . */
-	            'setAddParticipantSurfaceHandler': {
+	            'criticalError': {
 	                type: 'raw',
-	                isRequired: true,
-	                options: {valueType: `ConferenceStageTypes.SetAddParticipantSurfaceHandler`,}
+	                options: {valueType: `Error`,}
 	            },
 	            /** . */
 	            'connectionStatus': {
@@ -52,12 +51,19 @@ const conferenceStageSchema: SpruceSchemas.ConferenceStageControllers.v2025_11_1
 	                options: {choices: [{"value":"connected","label":"Connected"},{"value":"connecting","label":"Connecting"},{"value":"reconnecting","label":"Reconnecting"},{"value":"disconnected","label":"Disconnected"}],}
 	            },
 	            /** . */
-	            'criticalError': {
+	            'setAddParticipantSurfaceHandler': {
 	                type: 'raw',
-	                options: {valueType: `Error`,}
+	                isRequired: true,
+	                options: {valueType: `ConferenceStageTypes.SetAddParticipantSurfaceHandler`,}
 	            },
 	            /** . */
-	            'setLeaveHandler': {
+	            'setEnterConferenceHandler': {
+	                type: 'raw',
+	                isRequired: true,
+	                options: {valueType: `(handler: () => void) => void`,}
+	            },
+	            /** . */
+	            'setLeaveConferenceHandler': {
 	                type: 'raw',
 	                isRequired: true,
 	                options: {valueType: `(handler: () => void) => void`,}

@@ -34,13 +34,15 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'onDeviceError'?: (ConferenceStageTypes.OnDeviceErrorHandler) | undefined | null
 				
-				'setAddParticipantSurfaceHandler': (ConferenceStageTypes.SetAddParticipantSurfaceHandler)
+				'criticalError'?: (Error) | undefined | null
 				
 				'connectionStatus'?: ("connected" | "connecting" | "reconnecting" | "disconnected") | undefined | null
 				
-				'criticalError'?: (Error) | undefined | null
+				'setAddParticipantSurfaceHandler': (ConferenceStageTypes.SetAddParticipantSurfaceHandler)
 				
-				'setLeaveHandler': ((handler: () => void) => void)
+				'setEnterConferenceHandler': ((handler: () => void) => void)
+				
+				'setLeaveConferenceHandler': ((handler: () => void) => void)
 		}
 
 		interface ConferenceStageSchema extends SpruceSchema.Schema {
@@ -81,10 +83,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                options: {valueType: `ConferenceStageTypes.OnDeviceErrorHandler`,}
 			            },
 			            /** . */
-			            'setAddParticipantSurfaceHandler': {
+			            'criticalError': {
 			                type: 'raw',
-			                isRequired: true,
-			                options: {valueType: `ConferenceStageTypes.SetAddParticipantSurfaceHandler`,}
+			                options: {valueType: `Error`,}
 			            },
 			            /** . */
 			            'connectionStatus': {
@@ -92,12 +93,19 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                options: {choices: [{"value":"connected","label":"Connected"},{"value":"connecting","label":"Connecting"},{"value":"reconnecting","label":"Reconnecting"},{"value":"disconnected","label":"Disconnected"}],}
 			            },
 			            /** . */
-			            'criticalError': {
+			            'setAddParticipantSurfaceHandler': {
 			                type: 'raw',
-			                options: {valueType: `Error`,}
+			                isRequired: true,
+			                options: {valueType: `ConferenceStageTypes.SetAddParticipantSurfaceHandler`,}
 			            },
 			            /** . */
-			            'setLeaveHandler': {
+			            'setEnterConferenceHandler': {
+			                type: 'raw',
+			                isRequired: true,
+			                options: {valueType: `(handler: () => void) => void`,}
+			            },
+			            /** . */
+			            'setLeaveConferenceHandler': {
 			                type: 'raw',
 			                isRequired: true,
 			                options: {valueType: `(handler: () => void) => void`,}

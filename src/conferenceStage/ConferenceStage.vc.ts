@@ -15,7 +15,8 @@ export default class ConferenceStageViewController extends AbstractViewControlle
     public static id = 'conference-stage'
     private model: ConferenceStage
     private addParticipantSurfaceHandler?: AddParticipantSurfaceHandler
-    private leaveHandler?: () => void
+    private leaveConferenceHandler?: () => void
+    private enterConferenceHandler?: () => void
 
     public constructor(
         options: ViewControllerOptions & ConferenceStageViewControllerOptions
@@ -28,8 +29,11 @@ export default class ConferenceStageViewController extends AbstractViewControlle
             setAddParticipantSurfaceHandler: async (handler) => {
                 this.addParticipantSurfaceHandler = handler
             },
-            setLeaveHandler: async (handler) => {
-                this.leaveHandler = handler
+            setLeaveConferenceHandler: (handler) => {
+                this.leaveConferenceHandler = handler
+            },
+            setEnterConferenceHandler: (handler) => {
+                this.enterConferenceHandler = handler
             },
         }
     }
@@ -55,8 +59,12 @@ export default class ConferenceStageViewController extends AbstractViewControlle
         this.triggerRender()
     }
 
-    public leave() {
-        this.leaveHandler?.()
+    public leaveConference() {
+        this.leaveConferenceHandler?.()
+    }
+
+    public enterConference() {
+        this.enterConferenceHandler?.()
     }
 
     public render(): ConferenceStage {
@@ -66,5 +74,7 @@ export default class ConferenceStageViewController extends AbstractViewControlle
 
 export type ConferenceStageViewControllerOptions = Omit<
     ConferenceStage,
-    'setAddParticipantSurfaceHandler' | 'setLeaveHandler'
+    | 'setAddParticipantSurfaceHandler'
+    | 'setLeaveConferenceHandler'
+    | 'setEnterConferenceHandler'
 >
