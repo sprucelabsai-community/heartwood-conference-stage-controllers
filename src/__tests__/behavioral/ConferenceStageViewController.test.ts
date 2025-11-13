@@ -6,9 +6,11 @@ import {
     AddParticipantSurfaceOptions,
     ConnectionStatus,
     OnJoinOptions,
-    SurfaceRenderer,
 } from '../../conferenceStage.types'
 import MockParticipantSurface from '../../participantSurface/MockParticipantSurface'
+
+class HTMLCanvasElement {}
+class HTMLVideoElement {}
 
 @suite()
 export default class ConferenceStageViewControllerTest extends AbstractSpruceFixtureTest {
@@ -73,14 +75,14 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
 
     @test(
         'can invoke addParticipantSurface callback with rederer canvas',
-        'canvas'
+        new HTMLCanvasElement()
     )
     @test(
         'can invoke addParticipantSurface callback with rederer video',
-        'video'
+        new HTMLVideoElement()
     )
     protected async addingParticipantSurfaceInvokesCallabackInViewModel(
-        renderer: SurfaceRenderer
+        element: HTMLElement
     ) {
         const model = this.render()
         let passedOptions: AddParticipantSurfaceOptions | undefined
@@ -91,7 +93,7 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
             return surface
         })
 
-        const options: AddParticipantSurfaceOptions = { renderer }
+        const options: AddParticipantSurfaceOptions = { element }
         const actual = await this.addParticipant(options)
 
         assert.isEqualDeep(

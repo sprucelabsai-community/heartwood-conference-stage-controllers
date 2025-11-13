@@ -27,10 +27,8 @@ export interface ParticipantSurface {
     destroy(): void
 }
 
-export type SurfaceRenderer = 'canvas' | 'video'
-
 export interface AddParticipantSurfaceOptions {
-    renderer: SurfaceRenderer
+    element: HTMLElement
 }
 
 export interface OnJoinOptions {
