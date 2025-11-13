@@ -17,6 +17,7 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
     private vc!: ConferenceStageViewController
     private lastOnJoinOptions?: OnJoinOptions
     private lastOnDeviceChangeOptions?: Partial<OnJoinOptions>
+    private onJoinResponse?: boolean
 
     protected async beforeEach(): Promise<void> {
         await super.beforeEach()
@@ -25,6 +26,7 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
             {
                 onJoin: async (options) => {
                     this.lastOnJoinOptions = options
+                    return this.onJoinResponse
                 },
                 onLeave: async () => {
                     //no test needed because of passthrough

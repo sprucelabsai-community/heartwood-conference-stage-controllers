@@ -3,7 +3,7 @@ import SpruceError from './errors/SpruceError'
 
 export { default as ConferenceStageViewController } from './conferenceStage/ConferenceStage.vc'
 
-export type OnJoinHandler = (options: OnJoinOptions) => Promise<void>
+export type OnJoinHandler = (options: OnJoinOptions) => Promise<void | boolean>
 export type OnDeviceChangeHandler = (
     options: OnDeviceChangeOptions
 ) => Promise<void>
