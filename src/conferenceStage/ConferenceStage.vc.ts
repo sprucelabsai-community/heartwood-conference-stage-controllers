@@ -16,7 +16,7 @@ export default class ConferenceStageViewController extends AbstractViewControlle
     private model: ConferenceStage
     private addParticipantSurfaceHandler?: AddParticipantSurfaceHandler
     private leaveConferenceHandler?: () => void
-    private enterConferenceHandler?: () => void
+    private enterConferenceHandler?: () => Promise<void>
 
     public constructor(
         options: ViewControllerOptions & ConferenceStageViewControllerOptions
@@ -63,8 +63,8 @@ export default class ConferenceStageViewController extends AbstractViewControlle
         this.leaveConferenceHandler?.()
     }
 
-    public enterConference() {
-        this.enterConferenceHandler?.()
+    public async enterConference() {
+        await this.enterConferenceHandler?.()
     }
 
     public render(): ConferenceStage {

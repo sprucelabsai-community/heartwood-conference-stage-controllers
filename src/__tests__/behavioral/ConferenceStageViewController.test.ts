@@ -135,7 +135,7 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
     protected async leaveCallsOnLeaveInViewModel() {
         const { setLeaveConferenceHandler } = this.render()
         let wasHit = false
-        setLeaveConferenceHandler(() => {
+        setLeaveConferenceHandler(async () => {
             wasHit = true
         })
 

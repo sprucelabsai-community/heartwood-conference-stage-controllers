@@ -7,6 +7,11 @@ export type OnJoinHandler = (options: OnJoinOptions) => Promise<void | boolean>
 export type OnDeviceChangeHandler = (
     options: OnDeviceChangeOptions
 ) => Promise<void>
+export type OnDeviceErrorHandler = (error: SpruceError) => Promise<void> | void
+export type SetGenericStateChangeHandler = (
+    handler: GenericStateChangeHandler
+) => void
+export type GenericStateChangeHandler = () => Promise<void>
 
 export type SetAddParticipantSurfaceHandler = (
     handler: AddParticipantSurfaceHandler
@@ -42,5 +47,3 @@ export type ConferenceStage =
     SpruceSchemas.ConferenceStageControllers.v2025_11_10.ConferenceStage
 
 export type ConnectionStatus = NonNullable<ConferenceStage['connectionStatus']>
-
-export type OnDeviceErrorHandler = (error: SpruceError) => Promise<void> | void

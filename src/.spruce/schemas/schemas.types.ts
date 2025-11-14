@@ -40,9 +40,9 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'setAddParticipantSurfaceHandler': (ConferenceStageTypes.SetAddParticipantSurfaceHandler)
 				
-				'setEnterConferenceHandler': ((handler: () => void) => void)
+				'setEnterConferenceHandler': (ConferenceStageTypes.SetGenericStateChangeHandler)
 				
-				'setLeaveConferenceHandler': ((handler: () => void) => void)
+				'setLeaveConferenceHandler': (ConferenceStageTypes.SetGenericStateChangeHandler)
 		}
 
 		interface ConferenceStageSchema extends SpruceSchema.Schema {
@@ -102,13 +102,13 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'setEnterConferenceHandler': {
 			                type: 'raw',
 			                isRequired: true,
-			                options: {valueType: `(handler: () => void) => void`,}
+			                options: {valueType: `ConferenceStageTypes.SetGenericStateChangeHandler`,}
 			            },
 			            /** . */
 			            'setLeaveConferenceHandler': {
 			                type: 'raw',
 			                isRequired: true,
-			                options: {valueType: `(handler: () => void) => void`,}
+			                options: {valueType: `ConferenceStageTypes.SetGenericStateChangeHandler`,}
 			            },
 			    }
 		}

@@ -85,14 +85,14 @@ export default buildSchema({
             type: 'raw',
             isRequired: true,
             options: {
-                valueType: '(handler: () => void) => void',
+                valueType: 'ConferenceStageTypes.SetGenericStateChangeHandler',
             },
         },
         setLeaveConferenceHandler: {
             type: 'raw',
             isRequired: true,
             options: {
-                valueType: '(handler: () => void) => void',
+                valueType: 'ConferenceStageTypes.SetGenericStateChangeHandler',
             },
         },
     },

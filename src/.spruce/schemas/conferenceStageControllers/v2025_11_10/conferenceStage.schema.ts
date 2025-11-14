@@ -60,13 +60,13 @@ const conferenceStageSchema: SpruceSchemas.ConferenceStageControllers.v2025_11_1
 	            'setEnterConferenceHandler': {
 	                type: 'raw',
 	                isRequired: true,
-	                options: {valueType: `(handler: () => void) => void`,}
+	                options: {valueType: `ConferenceStageTypes.SetGenericStateChangeHandler`,}
 	            },
 	            /** . */
 	            'setLeaveConferenceHandler': {
 	                type: 'raw',
 	                isRequired: true,
-	                options: {valueType: `(handler: () => void) => void`,}
+	                options: {valueType: `ConferenceStageTypes.SetGenericStateChangeHandler`,}
 	            },
 	    }
 }
