@@ -94,7 +94,11 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
     ) {
         const model = this.render()
         let passedOptions: AddParticipantSurfaceOptions | undefined
-        const surface = new MockParticipantSurface()
+        const surface = new MockParticipantSurface({
+            onDestroy: () => {},
+            element,
+            id: generateId(),
+        })
 
         model.setAddParticipantSurfaceHandler(async (options) => {
             passedOptions = options
