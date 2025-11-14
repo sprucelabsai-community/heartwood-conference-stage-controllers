@@ -8,6 +8,7 @@ import {
     AddParticipantSurfaceOptions,
     ConferenceStage,
     ConnectionStatus,
+    GenericStateChangeHandler,
     ParticipantSurface,
 } from '../conferenceStage.types'
 
@@ -15,8 +16,8 @@ export default class ConferenceStageViewController extends AbstractViewControlle
     public static id = 'conference-stage'
     private model: ConferenceStage
     private addParticipantSurfaceHandler?: AddParticipantSurfaceHandler
-    private leaveConferenceHandler?: () => void
-    private enterConferenceHandler?: () => Promise<void>
+    private leaveConferenceHandler?: GenericStateChangeHandler
+    private enterConferenceHandler?: GenericStateChangeHandler
 
     public constructor(
         options: ViewControllerOptions & ConferenceStageViewControllerOptions
@@ -59,8 +60,8 @@ export default class ConferenceStageViewController extends AbstractViewControlle
         this.triggerRender()
     }
 
-    public leaveConference() {
-        this.leaveConferenceHandler?.()
+    public async leaveConference() {
+        await this.leaveConferenceHandler?.()
     }
 
     public async enterConference() {

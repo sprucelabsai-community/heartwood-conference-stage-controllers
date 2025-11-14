@@ -141,7 +141,7 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
 
         assert.isFalse(wasHit, 'onLeave handler was hit too early')
 
-        this.leaveConference()
+        await this.leaveConference()
 
         assert.isTrue(
             wasHit,
@@ -169,7 +169,7 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
 
         assert.isFalse(wasHit, 'enterConference handler was hit too early')
 
-        this.vc.enterConference()
+        await this.vc.enterConference()
 
         assert.isTrue(
             wasHit,
@@ -185,8 +185,8 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
         this.vc.setConnectionStatus(status)
     }
 
-    private leaveConference() {
-        this.vc.leaveConference()
+    private async leaveConference() {
+        await this.vc.leaveConference()
     }
 
     private setCriticalError(err: Error) {
