@@ -15,6 +15,7 @@ export default class TestingParticipantSurfaceTest extends AbstractSpruceFixture
             'conference-stage-controllers.conference-stage',
             {}
         ) as MockConferenceStageViewController
+        await this.stageVc.enterConference()
     }
 
     @test()

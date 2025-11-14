@@ -5,13 +5,12 @@ import {
 import { AbstractSpruceFixtureTest } from '@sprucelabs/spruce-test-fixtures'
 import { test, suite, assert, errorAssert } from '@sprucelabs/test-utils'
 import MockConferenceStageViewController from '../../../conferenceStage/MockConferenceStageViewController'
-import { ConferenceStageViewController } from '../../../conferenceStage.types'
 import conferenceStageAssert from '../../../conferenceStageAssert'
 
 @suite()
 export default class TestingTheConferenceStageTest extends AbstractSpruceFixtureTest {
     private cardVc!: CardViewController
-    private stageVc!: ConferenceStageViewController
+    private stageVc!: MockConferenceStageViewController
 
     protected async beforeEach() {
         await super.beforeEach()
@@ -21,7 +20,7 @@ export default class TestingTheConferenceStageTest extends AbstractSpruceFixture
         this.stageVc = this.views.Controller(
             'conference-stage-controllers.conference-stage',
             {}
-        )
+        ) as MockConferenceStageViewController
     }
 
     @test()
@@ -93,6 +92,16 @@ export default class TestingTheConferenceStageTest extends AbstractSpruceFixture
             match,
             MockConferenceStageViewController,
             'Returned stage is not an instance of MockConferenceStageViewController'
+        )
+    }
+
+    @test()
+    protected async throwsIfTryingToAddParticipantBeforeEnteringStage() {
+        await assert.doesThrowAsync(() =>
+            this.stageVc.addParticipantSurface({
+                id: 'participant-1',
+                element: {} as HTMLVideoElement,
+            })
         )
     }
 

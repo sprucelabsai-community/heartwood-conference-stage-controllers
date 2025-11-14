@@ -52,6 +52,10 @@ export default class MockConferenceStageViewController extends ConferenceStageVi
         options: AddParticipantSurfaceOptions
     ): Promise<MockParticipantSurface> {
         this.surfaceCount++
+        assert.isTruthy(
+            this.didEnterConference,
+            `You must enter the conference before adding participant surfaces. Try "this.stageVc.enterConference()" before adding participants.`
+        )
         const surface = new MockParticipantSurface({
             onDestroy: () => {
                 this.surfaceCount--
