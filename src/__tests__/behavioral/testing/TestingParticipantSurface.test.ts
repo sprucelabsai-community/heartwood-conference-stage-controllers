@@ -1,11 +1,9 @@
-import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { AbstractSpruceFixtureTest } from '@sprucelabs/spruce-test-fixtures'
 import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import MockConferenceStageViewController from '../../../conferenceStage/MockConferenceStageViewController'
 import { AddParticipantSurfaceOptions } from '../../../conferenceStage.types'
 import conferenceStageAssert from '../../../conferenceStageAssert'
 
-@fake.login()
 @suite()
 export default class TestingParticipantSurfaceTest extends AbstractSpruceFixtureTest {
     private stageVc!: MockConferenceStageViewController

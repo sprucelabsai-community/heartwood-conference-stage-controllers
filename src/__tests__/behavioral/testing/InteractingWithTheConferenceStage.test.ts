@@ -1,4 +1,3 @@
-import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { AbstractSpruceFixtureTest } from '@sprucelabs/spruce-test-fixtures'
 import {
     test,
@@ -15,7 +14,6 @@ import {
 import conferenceStageInteractor from '../../../conferenceStageInteractor'
 import SpruceError from '../../../errors/SpruceError'
 
-@fake.login()
 @suite()
 export default class InteractingWithTheConferenceStageTest extends AbstractSpruceFixtureTest {
     private didTriggerOnJoin = false
