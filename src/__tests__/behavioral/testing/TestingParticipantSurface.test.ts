@@ -176,6 +176,32 @@ export default class TestingParticipantSurfaceTest extends AbstractSpruceFixture
         surface.assertIsSpeaking(false)
     }
 
+    @test()
+    protected async canAssertPassedElement() {
+        const element = {} as HTMLElement
+        const surface = await this.addParticipantSurface({ element })
+        surface.assertElementEquals(element)
+        assert.doesThrow(() => surface.assertElementEquals({} as HTMLElement))
+    }
+
+    @test()
+    protected async canAssertIsSelf() {
+        const surface = await this.addParticipantSurface({ isSelf: true })
+        surface.assertIsSelf()
+        assert.doesThrow(() => surface.assertIsNotSelf())
+
+        const surface2 = await this.addParticipantSurface({ isSelf: false })
+        surface2.assertIsNotSelf()
+        assert.doesThrow(() => surface2.assertIsSelf())
+    }
+
+    @test()
+    protected async surfaceIsNotSelfByDefault() {
+        const surface = await this.addParticipantSurface()
+        surface.assertIsNotSelf()
+        assert.doesThrow(() => surface.assertIsSelf())
+    }
+
     private getSurface(id: string) {
         return this.stageVc.getParticipantSurface(id)
     }

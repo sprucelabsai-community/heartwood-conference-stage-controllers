@@ -15,10 +15,14 @@ export default class MockParticipantSurface implements ParticipantSurface {
     private videoStatus?: VideoStatus
     private connectionQuality?: ConnectionQuality
     private isSpeaking = false
+    private element: HTMLElement
+    private isSelf: boolean | undefined
 
     public constructor(options: MockParticipantSurfaceOptions) {
-        const { onDestroy, id } = options
+        const { onDestroy, id, element, isSelf } = options
         this.destroyHandler = onDestroy
+        this.isSelf = isSelf ?? false
+        this.element = element
         this.id = id
     }
 
@@ -88,6 +92,18 @@ export default class MockParticipantSurface implements ParticipantSurface {
             expected,
             'AudioStatus does not match!'
         )
+    }
+
+    public assertElementEquals(element: HTMLElement) {
+        assert.isEqual(this.element, element, 'HTMLElement does not match!')
+    }
+
+    public assertIsNotSelf() {
+        assert.isFalse(this.isSelf, 'ParticipantSurface is self!')
+    }
+
+    public assertIsSelf() {
+        assert.isTrue(this.isSelf, 'ParticipantSurface is not self!')
     }
 }
 
