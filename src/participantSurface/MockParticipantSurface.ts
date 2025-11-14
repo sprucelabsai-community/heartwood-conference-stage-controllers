@@ -1,5 +1,10 @@
 import { generateId } from '@sprucelabs/test-utils'
-import { ParticipantSurface } from '../conferenceStage.types'
+import {
+    AudioStatus,
+    ConnectionQuality,
+    ParticipantSurface,
+    VideoStatus,
+} from '../conferenceStage.types'
 
 export default class MockParticipantSurface implements ParticipantSurface {
     public id: string
@@ -9,11 +14,9 @@ export default class MockParticipantSurface implements ParticipantSurface {
     }
 
     public setName(_name: string): void {}
-    public setAudioStatus(_status: 'muted' | 'unmuted' | 'unknown'): void {}
-    public setVideoStatus(_status: 'enabled' | 'disabled' | 'blocked'): void {}
-    public setConnectionQuality(
-        _status: 'good' | 'fair' | 'poor' | 'lost'
-    ): void {}
+    public setAudioStatus(_status: AudioStatus): void {}
+    public setVideoStatus(_status: VideoStatus): void {}
+    public setConnectionQuality(_status: ConnectionQuality): void {}
     public setIsSpeaking(_isSpeaking: boolean): void {}
     public destroy(): void {}
 }

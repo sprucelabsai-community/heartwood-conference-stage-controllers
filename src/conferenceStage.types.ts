@@ -21,12 +21,16 @@ export type AddParticipantSurfaceHandler = (
     options: AddParticipantSurfaceOptions
 ) => Promise<ParticipantSurface>
 
+export type AudioStatus = 'muted' | 'unmuted' | 'unknown'
+export type VideoStatus = 'enabled' | 'disabled' | 'blocked'
+export type ConnectionQuality = 'good' | 'fair' | 'poor' | 'lost'
+
 export interface ParticipantSurface {
     id: string
     setName(name: string): void
-    setAudioStatus(status: 'muted' | 'unmuted' | 'unknown'): void
-    setVideoStatus(status: 'enabled' | 'disabled' | 'blocked'): void
-    setConnectionQuality(status: 'good' | 'fair' | 'poor' | 'lost'): void
+    setAudioStatus(status: AudioStatus): void
+    setVideoStatus(status: VideoStatus): void
+    setConnectionQuality(status: ConnectionQuality): void
     setIsSpeaking(isSpeaking: boolean): void
     destroy(): void
 }
@@ -34,6 +38,7 @@ export interface ParticipantSurface {
 export interface AddParticipantSurfaceOptions {
     element: HTMLElement
     id: string
+    isSelf?: boolean
 }
 
 export interface OnJoinOptions {
