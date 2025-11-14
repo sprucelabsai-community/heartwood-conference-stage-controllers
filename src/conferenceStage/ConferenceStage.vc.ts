@@ -11,6 +11,7 @@ import {
     GenericStateChangeHandler,
     ParticipantSurface,
 } from '../conferenceStage.types'
+import SpruceError from '../errors/SpruceError'
 
 export default class ConferenceStageViewController extends AbstractViewController<ConferenceStage> {
     public static id = 'conference-stage'
@@ -42,7 +43,12 @@ export default class ConferenceStageViewController extends AbstractViewControlle
     public async addParticipantSurface(
         options: AddParticipantSurfaceOptions
     ): Promise<ParticipantSurface> {
-        return await this.addParticipantSurfaceHandler!(options)
+        if (!this.addParticipantSurfaceHandler) {
+            throw new SpruceError({
+                code: 'ADD_PARTICIPANT_SURFACE_HANDLER_NOT_SET',
+            })
+        }
+        return await this.addParticipantSurfaceHandler(options)
     }
 
     public setConnectionStatus(status: ConnectionStatus) {

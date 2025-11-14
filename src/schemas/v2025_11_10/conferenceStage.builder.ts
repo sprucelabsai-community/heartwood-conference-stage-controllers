@@ -72,7 +72,6 @@ export default buildSchema({
                 ],
             },
         },
-
         setAddParticipantSurfaceHandler: {
             type: 'raw',
             isRequired: true,

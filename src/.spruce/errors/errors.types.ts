@@ -5,6 +5,7 @@ import * as SpruceSchema from '@sprucelabs/schema'
 
 
 
+
 export declare namespace SpruceErrors.ConferenceStageControllers {
 
 	
@@ -21,6 +22,26 @@ export declare namespace SpruceErrors.ConferenceStageControllers {
 	}
 
 	export type DeviceErrorEntity = SchemaEntity<SpruceErrors.ConferenceStageControllers.DeviceErrorSchema>
+
+}
+
+
+export declare namespace SpruceErrors.ConferenceStageControllers {
+
+	
+	export interface AddParticipantSurfaceHandlerNotSet {
+		
+	}
+
+	export interface AddParticipantSurfaceHandlerNotSetSchema extends SpruceSchema.Schema {
+		id: 'addParticipantSurfaceHandlerNotSet',
+		namespace: 'ConferenceStageControllers',
+		name: 'Add participant surface handler not set',
+		    fields: {
+		    }
+	}
+
+	export type AddParticipantSurfaceHandlerNotSetEntity = SchemaEntity<SpruceErrors.ConferenceStageControllers.AddParticipantSurfaceHandlerNotSetSchema>
 
 }
 

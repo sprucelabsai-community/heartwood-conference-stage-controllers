@@ -8,8 +8,13 @@ export default class SpruceError extends BaseSpruceError<ErrorOptions> {
         let message
         switch (options?.code) {
             case 'DEVICE_ERROR':
-                message = 'A Device error just happened!'
+                message = `There was an issue connecting to your device! The original error is ${options.originalError?.message}`
                 break
+
+            case 'ADD_PARTICIPANT_SURFACE_HANDLER_NOT_SET':
+                message = `This conference bridge has not been configured properly. Make sure to call setAddParticipantSurfaceHandler(...) in your front-end component and that you have actually entered the conference using 'await this.conferenceStage.enterConference()' before adding participants.`
+                break
+
             default:
                 message = super.friendlyMessage()
         }

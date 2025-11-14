@@ -1,6 +1,12 @@
 import { vcAssert } from '@sprucelabs/heartwood-view-controllers'
 import { AbstractSpruceFixtureTest } from '@sprucelabs/spruce-test-fixtures'
-import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
+import {
+    test,
+    suite,
+    assert,
+    generateId,
+    errorAssert,
+} from '@sprucelabs/test-utils'
 import ConferenceStageViewController from '../../conferenceStage/ConferenceStage.vc'
 import {
     AddParticipantSurfaceOptions,
@@ -175,6 +181,22 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
             wasHit,
             'enterConference handler was not called when calling enterConference on vc'
         )
+    }
+
+    @test()
+    protected async notSettingAParticipantSurfaceHandlerThrowsHelpfulError() {
+        this.vc = this.views.Controller(
+            'conference-stage-controllers.conference-stage',
+            {}
+        )
+
+        const err = await assert.doesThrowAsync(async () => {
+            await this.addParticipant({
+                element: {} as HTMLElement,
+            })
+        })
+
+        errorAssert.assertError(err, 'ADD_PARTICIPANT_SURFACE_HANDLER_NOT_SET')
     }
 
     private clearCriticalError() {
