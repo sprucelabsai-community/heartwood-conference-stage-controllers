@@ -12,7 +12,7 @@ import MockConferenceStageViewController from './conferenceStage/MockConferenceS
 import { ConferenceStage } from './conferenceStage.types'
 
 let wasBeforeEachRun = false
-export const conferenceStageAssert = {
+const conferenceStageAssert = {
     beforeEach(views: SimpleViewControllerFactory) {
         assertOptions(
             { views },
@@ -85,3 +85,5 @@ if (!this.views.hasController('conference-stage-controllers.conference-stage')) 
         return match.controller as MockConferenceStageViewController
     },
 }
+
+export default conferenceStageAssert

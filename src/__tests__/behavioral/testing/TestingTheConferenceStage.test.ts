@@ -6,7 +6,7 @@ import { AbstractSpruceFixtureTest } from '@sprucelabs/spruce-test-fixtures'
 import { test, suite, assert, errorAssert } from '@sprucelabs/test-utils'
 import MockConferenceStageViewController from '../../../conferenceStage/MockConferenceStageViewController'
 import { ConferenceStageViewController } from '../../../conferenceStage.types'
-import { conferenceStageAssert } from '../../../conferenceStageAssert'
+import conferenceStageAssert from '../../../conferenceStageAssert'
 
 @suite()
 export default class TestingTheConferenceStageTest extends AbstractSpruceFixtureTest {

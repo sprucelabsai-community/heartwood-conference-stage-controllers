@@ -15,3 +15,6 @@ export { default as ConferenceStageViewController } from './conferenceStage/Conf
 export * from './conferenceStage/ConferenceStage.vc'
 export { default as MockParticipantSurface } from './participantSurface/MockParticipantSurface'
 export { default as ConferenceStageError } from './errors/SpruceError'
+export { default as conferenceStageInteractor } from './conferenceStageInteractor'
+export { default as MockConferenceStageViewController } from './conferenceStage/MockConferenceStageViewController'
+export { default as conferenceStageAssert } from './conferenceStageAssert'
