@@ -5,11 +5,10 @@ import {
     SimpleViewControllerFactory,
     ViewController,
 } from '@sprucelabs/heartwood-view-controllers'
-import { ConnectionStatus } from '@sprucelabs/mercury-client'
 import { assertOptions } from '@sprucelabs/schema'
 import { assert } from '@sprucelabs/test-utils'
 import MockConferenceStageViewController from './conferenceStage/MockConferenceStageViewController'
-import { ConferenceStage } from './conferenceStage.types'
+import { ConferenceStage, ConnectionStatus } from './conferenceStage.types'
 
 let wasBeforeEachRun = false
 const conferenceStageAssert = {

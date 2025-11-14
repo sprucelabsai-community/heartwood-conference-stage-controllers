@@ -1,4 +1,4 @@
-import { SpruceSchemas } from '@sprucelabs/mercury-types'
+import { SpruceSchemas } from '#spruce/schemas/schemas.types'
 import SpruceError from './errors/SpruceError'
 
 export { default as ConferenceStageViewController } from './conferenceStage/ConferenceStage.vc'

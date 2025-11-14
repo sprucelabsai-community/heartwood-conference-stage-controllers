@@ -1,6 +1,6 @@
 {
   "name": "@sprucelabs/heartwood-conference-stage-controllers",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "files": [
     "build"
   ],
@@ -56,7 +56,16 @@
   "description": "Video conferencing support right in Spruce!",
   "skill": {
     "namespace": "conference-stage-controllers",
-    "version": "v2025_11_10"
+    "version": "v2025_11_10",
+    "upgradeIgnoreList": [
+      "@sprucelabs/mercury-client",
+      "@sprucelabs/mercury-types",
+      "@sprucelabs/mercury-core-events",
+      "@sprucelabs/spruce-event-plugin",
+      "@sprucelabs/spruce-permission-plugin",
+      "@sprucelabs/spruce-skill-utils",
+      "@sprucelabs/spruce-view-plugin"
+    ]
   },
   "jest": {
     "testRunner": "jest-circus/runner",
@@ -79,15 +88,7 @@
   "dependencies": {
     "@sprucelabs/error": "^8.0.3",
     "@sprucelabs/heartwood-view-controllers": "^127.0.12",
-    "@sprucelabs/mercury-client": "^45.0.10",
-    "@sprucelabs/mercury-core-events": "^28.0.9",
-    "@sprucelabs/mercury-types": "^49.0.8",
     "@sprucelabs/schema": "^33.0.7",
-    "@sprucelabs/spruce-core-schemas": "^42.0.8",
-    "@sprucelabs/spruce-event-plugin": "^75.0.9",
-    "@sprucelabs/spruce-event-utils": "^42.0.8",
-    "@sprucelabs/spruce-permission-plugin": "^46.0.9",
-    "@sprucelabs/spruce-skill-utils": "^33.0.8",
-    "@sprucelabs/spruce-view-plugin": "^60.0.10"
+    "@sprucelabs/spruce-core-schemas": "^42.0.8"
   }
 }

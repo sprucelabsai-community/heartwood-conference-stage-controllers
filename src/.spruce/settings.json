@@ -3,20 +3,14 @@
     "skipped": []
   },
   "skipped": [
-    "skill"
+    "skill",
+    "event",
+    "permission"
   ],
   "installed": [
     "test",
     "schema",
-    "permission",
-    "event",
     "view",
     "error"
-  ],
-  "dependencies": [
-    {
-      "id": "**",
-      "namespace": "heartwood"
-    }
   ]
 }
