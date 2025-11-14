@@ -23,7 +23,6 @@ export type AddParticipantSurfaceHandler = (
 
 export interface ParticipantSurface {
     id: string
-    mediaElement: HTMLVideoElement | HTMLCanvasElement
     setName(name: string): void
     setAudioStatus(status: 'muted' | 'unmuted' | 'unknown'): void
     setVideoStatus(status: 'enabled' | 'disabled' | 'blocked'): void
@@ -34,6 +33,7 @@ export interface ParticipantSurface {
 
 export interface AddParticipantSurfaceOptions {
     element: HTMLElement
+    id: string
 }
 
 export interface OnJoinOptions {

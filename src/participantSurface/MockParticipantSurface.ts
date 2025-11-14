@@ -3,11 +3,9 @@ import { ParticipantSurface } from '../conferenceStage.types'
 
 export default class MockParticipantSurface implements ParticipantSurface {
     public id: string
-    public mediaElement: HTMLVideoElement | HTMLCanvasElement
 
     public constructor() {
         this.id = generateId()
-        this.mediaElement = {} as any
     }
 
     public setName(_name: string): void {}

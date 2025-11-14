@@ -101,7 +101,10 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
             return surface
         })
 
-        const options: AddParticipantSurfaceOptions = { element }
+        const options: AddParticipantSurfaceOptions = {
+            element,
+            id: generateId(),
+        }
         const actual = await this.addParticipant(options)
 
         assert.isEqualDeep(
@@ -192,6 +195,7 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
 
         const err = await assert.doesThrowAsync(async () => {
             await this.addParticipant({
+                id: generateId(),
                 element: {} as HTMLElement,
             })
         })
