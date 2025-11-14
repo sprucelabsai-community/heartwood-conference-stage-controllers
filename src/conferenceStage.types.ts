@@ -39,6 +39,7 @@ export interface AddParticipantSurfaceOptions {
     element: HTMLElement
     id: string
     isSelf?: boolean
+    name?: string
 }
 
 export interface OnJoinOptions {

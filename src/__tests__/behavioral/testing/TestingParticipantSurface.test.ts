@@ -201,6 +201,13 @@ export default class TestingParticipantSurfaceTest extends AbstractSpruceFixture
         assert.doesThrow(() => surface.assertIsSelf())
     }
 
+    @test()
+    protected async canSetNameWhenAddingSurface() {
+        const name = generateId()
+        const surface = await this.addParticipantSurface({ name })
+        surface.assertNameEquals(name)
+    }
+
     private getSurface(id: string) {
         return this.stageVc.getParticipantSurface(id)
     }

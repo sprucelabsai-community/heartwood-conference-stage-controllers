@@ -19,11 +19,12 @@ export default class MockParticipantSurface implements ParticipantSurface {
     private isSelf: boolean | undefined
 
     public constructor(options: MockParticipantSurfaceOptions) {
-        const { onDestroy, id, element, isSelf } = options
+        const { onDestroy, id, element, isSelf, name } = options
         this.destroyHandler = onDestroy
         this.isSelf = isSelf ?? false
         this.element = element
         this.id = id
+        this.name = name
     }
 
     public setName(name: string) {
