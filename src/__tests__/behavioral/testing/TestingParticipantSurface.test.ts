@@ -208,6 +208,14 @@ export default class TestingParticipantSurfaceTest extends AbstractSpruceFixture
         surface.assertNameEquals(name)
     }
 
+    @test()
+    protected async knowsIfDestroyed() {
+        const surface = await this.addParticipantSurface()
+        assert.doesThrow(() => surface.assertIsDestroyed())
+        surface.destroy()
+        surface.assertIsDestroyed()
+    }
+
     private getSurface(id: string) {
         return this.stageVc.getParticipantSurface(id)
     }

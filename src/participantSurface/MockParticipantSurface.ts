@@ -17,6 +17,7 @@ export default class MockParticipantSurface implements ParticipantSurface {
     private isSpeaking = false
     private element: HTMLElement
     private isSelf: boolean | undefined
+    private isDestroyed = false
 
     public constructor(options: MockParticipantSurfaceOptions) {
         const { onDestroy, id, element, isSelf, name } = options
@@ -73,6 +74,11 @@ export default class MockParticipantSurface implements ParticipantSurface {
 
     public destroy() {
         this.destroyHandler()
+        this.isDestroyed = true
+    }
+
+    public assertIsDestroyed() {
+        assert.isTrue(this.isDestroyed, 'ParticipantSurface is not destroyed!')
     }
 
     public assertNameEquals(name: string) {
