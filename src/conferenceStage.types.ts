@@ -25,6 +25,7 @@ export type ConnectionQuality = 'good' | 'fair' | 'poor' | 'lost'
 export interface ConferenceParticipant {
     id: string
     setName(name: string): void
+    getName(): string | undefined
     setAudioStatus(status: AudioStatus): void
     setVideoStatus(status: VideoStatus): void
     setConnectionQuality(status: ConnectionQuality): void

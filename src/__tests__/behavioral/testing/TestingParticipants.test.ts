@@ -249,6 +249,17 @@ export default class TestingParticipantTest extends AbstractSpruceFixtureTest {
         )
     }
 
+    @test()
+    protected async canGetName() {
+        const name = generateId()
+        const participant = await this.addParticipant({ name })
+        assert.isEqual(
+            participant.getName(),
+            name,
+            'Name did not come back right'
+        )
+    }
+
     private getParticipant(id: string) {
         return this.stageVc.getParticipant(id)
     }

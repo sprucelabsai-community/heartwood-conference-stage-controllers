@@ -34,6 +34,10 @@ export default class MockConferenceParticipant
         this.name = name
     }
 
+    public getName() {
+        return this.name
+    }
+
     public setAudioStatus(status: AudioStatus) {
         this.audioStatus = status
     }
