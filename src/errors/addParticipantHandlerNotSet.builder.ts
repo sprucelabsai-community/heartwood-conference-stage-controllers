@@ -1,7 +1,7 @@
 import { buildErrorSchema } from '@sprucelabs/schema'
 
 export default buildErrorSchema({
-    id: 'addParticipantSurfaceHandlerNotSet',
-    name: 'Add participant surface handler not set',
+    id: 'addParticipantHandlerNotSet',
+    name: 'Add participant handler not set',
     fields: {},
 })

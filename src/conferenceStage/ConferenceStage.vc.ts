@@ -4,19 +4,19 @@ import {
     removeUniversalViewOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import {
-    AddParticipantSurfaceHandler,
-    AddParticipantSurfaceOptions,
+    AddParticipantHandler,
+    AddConferenceParticipantOptions,
     ConferenceStage,
     ConnectionStatus,
     GenericStateChangeHandler,
-    ParticipantSurface,
+    ConferenceParticipant,
 } from '../conferenceStage.types'
 import SpruceError from '../errors/SpruceError'
 
 export default class ConferenceStageViewController extends AbstractViewController<ConferenceStage> {
     public static id = 'conference-stage'
     private model: ConferenceStage
-    private addParticipantSurfaceHandler?: AddParticipantSurfaceHandler
+    private addParticipantHandler?: AddParticipantHandler
     private leaveConferenceHandler?: GenericStateChangeHandler
     private enterConferenceHandler?: GenericStateChangeHandler
 
@@ -28,27 +28,30 @@ export default class ConferenceStageViewController extends AbstractViewControlle
         this.model = {
             ...removeUniversalViewOptions(options),
             controller: this,
-            setAddParticipantSurfaceHandler: async (handler) => {
-                this.addParticipantSurfaceHandler = handler
-            },
-            setLeaveConferenceHandler: (handler) => {
-                this.leaveConferenceHandler = handler
-            },
-            setEnterConferenceHandler: (handler) => {
-                this.enterConferenceHandler = handler
+            handlers: {
+                setAddParticipantHandler: async (handler) => {
+                    this.addParticipantHandler = handler
+                },
+                setLeaveConferenceHandler: (handler) => {
+                    this.leaveConferenceHandler = handler
+                },
+                setEnterConferenceHandler: (handler) => {
+                    this.enterConferenceHandler = handler
+                },
+                setClickRetryOnCriticalErrorHandler: async () => {},
             },
         }
     }
 
-    public async addParticipantSurface(
-        options: AddParticipantSurfaceOptions
-    ): Promise<ParticipantSurface> {
-        if (!this.addParticipantSurfaceHandler) {
+    public async addParticipant(
+        options: AddConferenceParticipantOptions
+    ): Promise<ConferenceParticipant> {
+        if (!this.addParticipantHandler) {
             throw new SpruceError({
-                code: 'ADD_PARTICIPANT_SURFACE_HANDLER_NOT_SET',
+                code: 'ADD_PARTICIPANT_HANDLER_NOT_SET',
             })
         }
-        return await this.addParticipantSurfaceHandler(options)
+        return await this.addParticipantHandler(options)
     }
 
     public setConnectionStatus(status: ConnectionStatus) {
@@ -81,7 +84,5 @@ export default class ConferenceStageViewController extends AbstractViewControlle
 
 export type ConferenceStageViewControllerOptions = Omit<
     ConferenceStage,
-    | 'setAddParticipantSurfaceHandler'
-    | 'setLeaveConferenceHandler'
-    | 'setEnterConferenceHandler'
+    'handlers'
 >

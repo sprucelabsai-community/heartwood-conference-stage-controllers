@@ -19,6 +19,59 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.ConferenceStageControllers.v2025_11_10 {
 
 		
+		interface ConferenceStageHandlers {
+			
+				
+				'setAddParticipantHandler': (ConferenceStageTypes.SetAddParticipantHandler)
+				
+				'setEnterConferenceHandler': (ConferenceStageTypes.SetGenericStateChangeHandler)
+				
+				'setLeaveConferenceHandler': (ConferenceStageTypes.SetGenericStateChangeHandler)
+				
+				'setClickRetryOnCriticalErrorHandler': (ConferenceStageTypes.SetGenericStateChangeHandler)
+		}
+
+		interface ConferenceStageHandlersSchema extends SpruceSchema.Schema {
+			id: 'conferenceStageHandlers',
+			version: 'v2025_11_10',
+			namespace: 'ConferenceStageControllers',
+			name: '',
+			    fields: {
+			            /** . */
+			            'setAddParticipantHandler': {
+			                type: 'raw',
+			                isRequired: true,
+			                options: {valueType: `ConferenceStageTypes.SetAddParticipantHandler`,}
+			            },
+			            /** . */
+			            'setEnterConferenceHandler': {
+			                type: 'raw',
+			                isRequired: true,
+			                options: {valueType: `ConferenceStageTypes.SetGenericStateChangeHandler`,}
+			            },
+			            /** . */
+			            'setLeaveConferenceHandler': {
+			                type: 'raw',
+			                isRequired: true,
+			                options: {valueType: `ConferenceStageTypes.SetGenericStateChangeHandler`,}
+			            },
+			            /** . */
+			            'setClickRetryOnCriticalErrorHandler': {
+			                type: 'raw',
+			                isRequired: true,
+			                options: {valueType: `ConferenceStageTypes.SetGenericStateChangeHandler`,}
+			            },
+			    }
+		}
+
+		interface ConferenceStageHandlersEntity extends SchemaEntity<SpruceSchemas.ConferenceStageControllers.v2025_11_10.ConferenceStageHandlersSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.ConferenceStageControllers.v2025_11_10 {
+
+		
 		interface ConferenceStage {
 			
 				
@@ -35,14 +88,14 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				'onDeviceError'?: (ConferenceStageTypes.OnDeviceErrorHandler) | undefined | null
 				
 				'criticalError'?: (Error) | undefined | null
+				/** . Label for the button rendered under the critical error message. Set to null to hide the button. */
+				'retryAfterCriticalErrorButtonLabel'?: string | undefined | null
+				
+				'onClickRetryAfterCriticalError'?: (() => Promise<void>) | undefined | null
 				
 				'connectionStatus'?: ("connected" | "connecting" | "reconnecting" | "disconnected") | undefined | null
 				
-				'setAddParticipantSurfaceHandler': (ConferenceStageTypes.SetAddParticipantSurfaceHandler)
-				
-				'setEnterConferenceHandler': (ConferenceStageTypes.SetGenericStateChangeHandler)
-				
-				'setLeaveConferenceHandler': (ConferenceStageTypes.SetGenericStateChangeHandler)
+				'handlers': SpruceSchemas.ConferenceStageControllers.v2025_11_10.ConferenceStageHandlers
 		}
 
 		interface ConferenceStageSchema extends SpruceSchema.Schema {
@@ -87,28 +140,27 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                type: 'raw',
 			                options: {valueType: `Error`,}
 			            },
+			            /** . Label for the button rendered under the critical error message. Set to null to hide the button. */
+			            'retryAfterCriticalErrorButtonLabel': {
+			                type: 'text',
+			                hint: 'Label for the button rendered under the critical error message. Set to null to hide the button.',
+			                options: undefined
+			            },
+			            /** . */
+			            'onClickRetryAfterCriticalError': {
+			                type: 'raw',
+			                options: {valueType: `() => Promise<void>`,}
+			            },
 			            /** . */
 			            'connectionStatus': {
 			                type: 'select',
 			                options: {choices: [{"value":"connected","label":"Connected"},{"value":"connecting","label":"Connecting"},{"value":"reconnecting","label":"Reconnecting"},{"value":"disconnected","label":"Disconnected"}],}
 			            },
 			            /** . */
-			            'setAddParticipantSurfaceHandler': {
-			                type: 'raw',
+			            'handlers': {
+			                type: 'schema',
 			                isRequired: true,
-			                options: {valueType: `ConferenceStageTypes.SetAddParticipantSurfaceHandler`,}
-			            },
-			            /** . */
-			            'setEnterConferenceHandler': {
-			                type: 'raw',
-			                isRequired: true,
-			                options: {valueType: `ConferenceStageTypes.SetGenericStateChangeHandler`,}
-			            },
-			            /** . */
-			            'setLeaveConferenceHandler': {
-			                type: 'raw',
-			                isRequired: true,
-			                options: {valueType: `ConferenceStageTypes.SetGenericStateChangeHandler`,}
+			                options: {schema: SpruceSchemas.ConferenceStageControllers.v2025_11_10.ConferenceStageHandlersSchema,}
 			            },
 			    }
 		}

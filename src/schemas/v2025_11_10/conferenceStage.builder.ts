@@ -49,6 +49,16 @@ export default buildSchema({
                 valueType: 'Error',
             },
         },
+        retryAfterCriticalErrorButtonLabel: {
+            type: 'text',
+            hint: 'Label for the button rendered under the critical error message. Set to null to hide the button.',
+        },
+        onClickRetryAfterCriticalError: {
+            type: 'raw',
+            options: {
+                valueType: '() => Promise<void>',
+            },
+        },
         connectionStatus: {
             type: 'select',
             options: {
@@ -72,26 +82,39 @@ export default buildSchema({
                 ],
             },
         },
-        setAddParticipantSurfaceHandler: {
-            type: 'raw',
+        handlers: {
+            type: 'schema',
             isRequired: true,
             options: {
-                valueType:
-                    'ConferenceStageTypes.SetAddParticipantSurfaceHandler',
-            },
-        },
-        setEnterConferenceHandler: {
-            type: 'raw',
-            isRequired: true,
-            options: {
-                valueType: 'ConferenceStageTypes.SetGenericStateChangeHandler',
-            },
-        },
-        setLeaveConferenceHandler: {
-            type: 'raw',
-            isRequired: true,
-            options: {
-                valueType: 'ConferenceStageTypes.SetGenericStateChangeHandler',
+                schema: buildSchema({
+                    id: 'conferenceStageHandlers',
+                    fields: {
+                        setAddParticipantHandler: {
+                            type: 'raw',
+                            isRequired: true,
+                            options: {
+                                valueType:
+                                    'ConferenceStageTypes.SetAddParticipantHandler',
+                            },
+                        },
+                        setEnterConferenceHandler: {
+                            type: 'raw',
+                            isRequired: true,
+                            options: {
+                                valueType:
+                                    'ConferenceStageTypes.SetGenericStateChangeHandler',
+                            },
+                        },
+                        setLeaveConferenceHandler: {
+                            type: 'raw',
+                            isRequired: true,
+                            options: {
+                                valueType:
+                                    'ConferenceStageTypes.SetGenericStateChangeHandler',
+                            },
+                        },
+                    },
+                }),
             },
         },
     },

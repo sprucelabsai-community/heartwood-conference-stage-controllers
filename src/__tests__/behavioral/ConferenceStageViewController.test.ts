@@ -7,13 +7,13 @@ import {
     generateId,
     errorAssert,
 } from '@sprucelabs/test-utils'
+import MockConferenceParticipant from '../../conferenceParticipant/MockConferenceParticipant'
 import ConferenceStageViewController from '../../conferenceStage/ConferenceStage.vc'
 import {
-    AddParticipantSurfaceOptions,
+    AddConferenceParticipantOptions,
     ConnectionStatus,
     OnJoinOptions,
 } from '../../conferenceStage.types'
-import MockParticipantSurface from '../../participantSurface/MockParticipantSurface'
 
 class HTMLCanvasElement {}
 class HTMLVideoElement {}
@@ -82,31 +82,31 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
     }
 
     @test(
-        'can invoke addParticipantSurface callback with rederer canvas',
+        'can invoke addParticipant callback with rederer canvas',
         new HTMLCanvasElement()
     )
     @test(
-        'can invoke addParticipantSurface callback with rederer video',
+        'can invoke addParticipant callback with rederer video',
         new HTMLVideoElement()
     )
-    protected async addingParticipantSurfaceInvokesCallabackInViewModel(
+    protected async addingParticipantInvokesCallbackInViewModel(
         element: HTMLElement
     ) {
         const model = this.render()
-        let passedOptions: AddParticipantSurfaceOptions | undefined
-        const surface = new MockParticipantSurface({
+        let passedOptions: AddConferenceParticipantOptions | undefined
+        const participant = new MockConferenceParticipant({
             onDestroy: () => {},
-            element,
+            videoElement: element,
             id: generateId(),
         })
 
-        model.setAddParticipantSurfaceHandler(async (options) => {
+        model.handlers.setAddParticipantHandler(async (options) => {
             passedOptions = options
-            return surface
+            return participant
         })
 
-        const options: AddParticipantSurfaceOptions = {
-            element,
+        const options: AddConferenceParticipantOptions = {
+            videoElement: element,
             id: generateId(),
         }
         const actual = await this.addParticipant(options)
@@ -114,10 +114,10 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
         assert.isEqualDeep(
             passedOptions,
             options,
-            'Options to setAddParticipantSurfaceHandler mismatch'
+            'Options to setAddParticipantHandler mismatch'
         )
 
-        assert.isEqual(actual, surface, 'Returned participant surface mismatch')
+        assert.isEqual(actual, participant, 'Returned participant mismatch')
     }
 
     @test('can set connection status to connecting', 'connecting')
@@ -146,7 +146,9 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
 
     @test()
     protected async leaveCallsOnLeaveInViewModel() {
-        const { setLeaveConferenceHandler } = this.render()
+        const {
+            handlers: { setLeaveConferenceHandler },
+        } = this.render()
         let wasHit = false
         setLeaveConferenceHandler(async () => {
             wasHit = true
@@ -174,7 +176,9 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
 
     @test()
     protected async canEnterConference() {
-        const { setEnterConferenceHandler } = this.render()
+        const {
+            handlers: { setEnterConferenceHandler },
+        } = this.render()
         let wasHit = false
         setEnterConferenceHandler(async () => {
             wasHit = true
@@ -191,7 +195,7 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
     }
 
     @test()
-    protected async notSettingAParticipantSurfaceHandlerThrowsHelpfulError() {
+    protected async notSettingAParticipantHandlerThrowsHelpfulError() {
         this.vc = this.views.Controller(
             'conference-stage-controllers.conference-stage',
             {}
@@ -200,11 +204,11 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
         const err = await assert.doesThrowAsync(async () => {
             await this.addParticipant({
                 id: generateId(),
-                element: {} as HTMLElement,
+                videoElement: {} as HTMLElement,
             })
         })
 
-        errorAssert.assertError(err, 'ADD_PARTICIPANT_SURFACE_HANDLER_NOT_SET')
+        errorAssert.assertError(err, 'ADD_PARTICIPANT_HANDLER_NOT_SET')
     }
 
     private clearCriticalError() {
@@ -223,8 +227,8 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
         this.vc.setCriticalError(err)
     }
 
-    private async addParticipant(options: AddParticipantSurfaceOptions) {
-        return await this.vc.addParticipantSurface(options)
+    private async addParticipant(options: AddConferenceParticipantOptions) {
+        return await this.vc.addParticipant(options)
     }
 
     private render() {

@@ -4,10 +4,10 @@ import { ErrorOptions as ISpruceErrorOptions} from "@sprucelabs/error"
 export interface DeviceErrorErrorOptions extends SpruceErrors.ConferenceStageControllers.DeviceError, ISpruceErrorOptions {
 	code: 'DEVICE_ERROR'
 }
-export interface AddParticipantSurfaceHandlerNotSetErrorOptions extends SpruceErrors.ConferenceStageControllers.AddParticipantSurfaceHandlerNotSet, ISpruceErrorOptions {
-	code: 'ADD_PARTICIPANT_SURFACE_HANDLER_NOT_SET'
+export interface AddParticipantHandlerNotSetErrorOptions extends SpruceErrors.ConferenceStageControllers.AddParticipantHandlerNotSet, ISpruceErrorOptions {
+	code: 'ADD_PARTICIPANT_HANDLER_NOT_SET'
 }
 
-type ErrorOptions =  | DeviceErrorErrorOptions  | AddParticipantSurfaceHandlerNotSetErrorOptions 
+type ErrorOptions =  | DeviceErrorErrorOptions  | AddParticipantHandlerNotSetErrorOptions 
 
 export default ErrorOptions

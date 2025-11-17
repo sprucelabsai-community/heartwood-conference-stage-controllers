@@ -12,34 +12,34 @@ export type SetGenericStateChangeHandler = (
     handler: GenericStateChangeHandler
 ) => void
 export type GenericStateChangeHandler = () => Promise<void>
+export type SetAddParticipantHandler = (handler: AddParticipantHandler) => void
 
-export type SetAddParticipantSurfaceHandler = (
-    handler: AddParticipantSurfaceHandler
-) => void
-
-export type AddParticipantSurfaceHandler = (
-    options: AddParticipantSurfaceOptions
-) => Promise<ParticipantSurface>
+export type AddParticipantHandler = (
+    options: AddConferenceParticipantOptions
+) => Promise<ConferenceParticipant>
 
 export type AudioStatus = 'muted' | 'unmuted' | 'unknown'
 export type VideoStatus = 'enabled' | 'disabled' | 'blocked'
 export type ConnectionQuality = 'good' | 'fair' | 'poor' | 'lost'
 
-export interface ParticipantSurface {
+export interface ConferenceParticipant {
     id: string
     setName(name: string): void
     setAudioStatus(status: AudioStatus): void
     setVideoStatus(status: VideoStatus): void
     setConnectionQuality(status: ConnectionQuality): void
     setIsSpeaking(isSpeaking: boolean): void
+    setVideoElement(element: HTMLElement | null): void
+    getHasVideo(): boolean
     destroy(): void
 }
 
-export interface AddParticipantSurfaceOptions {
-    element: HTMLElement
+export interface AddConferenceParticipantOptions {
+    videoElement?: HTMLElement
     id: string
     isSelf?: boolean
     name?: string
+    avatarUrl?: string
 }
 
 export interface OnJoinOptions {

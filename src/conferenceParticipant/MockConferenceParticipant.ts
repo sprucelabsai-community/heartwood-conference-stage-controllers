@@ -1,13 +1,15 @@
 import { assert } from '@sprucelabs/test-utils'
 import {
-    AddParticipantSurfaceOptions,
+    AddConferenceParticipantOptions,
     AudioStatus,
     ConnectionQuality,
-    ParticipantSurface,
+    ConferenceParticipant,
     VideoStatus,
 } from '../conferenceStage.types'
 
-export default class MockParticipantSurface implements ParticipantSurface {
+export default class MockConferenceParticipant
+    implements ConferenceParticipant
+{
     public id: string
     private destroyHandler: DestroyHandler
     private name?: string
@@ -15,15 +17,15 @@ export default class MockParticipantSurface implements ParticipantSurface {
     private videoStatus?: VideoStatus
     private connectionQuality?: ConnectionQuality
     private isSpeaking = false
-    private element: HTMLElement
+    private videoElement?: HTMLElement | null
     private isSelf: boolean | undefined
     private isDestroyed = false
 
-    public constructor(options: MockParticipantSurfaceOptions) {
-        const { onDestroy, id, element, isSelf, name } = options
+    public constructor(options: MockParticipantOptions) {
+        const { onDestroy, id, videoElement: element, isSelf, name } = options
         this.destroyHandler = onDestroy
         this.isSelf = isSelf ?? false
-        this.element = element
+        this.videoElement = element
         this.id = id
         this.name = name
     }
@@ -78,19 +80,15 @@ export default class MockParticipantSurface implements ParticipantSurface {
     }
 
     public assertIsDestroyed() {
-        assert.isTrue(this.isDestroyed, 'ParticipantSurface is not destroyed!')
+        assert.isTrue(this.isDestroyed, 'Participant is not destroyed!')
     }
 
     public assertNameEquals(name: string) {
-        assert.isEqual(
-            this.name,
-            name,
-            'ParticipantSurface name does not match!'
-        )
+        assert.isEqual(this.name, name, 'Participant name does not match!')
     }
 
     public assertIdEquals(id: string) {
-        assert.isEqual(this.id, id, 'ParticipantSurface id does not match!')
+        assert.isEqual(this.id, id, 'Participant id does not match!')
     }
 
     public assertAudioStatusEquals(expected: AudioStatus) {
@@ -102,20 +100,32 @@ export default class MockParticipantSurface implements ParticipantSurface {
     }
 
     public assertElementEquals(element: HTMLElement) {
-        assert.isEqual(this.element, element, 'HTMLElement does not match!')
+        assert.isEqual(
+            this.videoElement,
+            element,
+            'HTMLElement does not match!'
+        )
     }
 
     public assertIsNotSelf() {
-        assert.isFalse(this.isSelf, 'ParticipantSurface is self!')
+        assert.isFalse(this.isSelf, 'Participant is self!')
     }
 
     public assertIsSelf() {
-        assert.isTrue(this.isSelf, 'ParticipantSurface is not self!')
+        assert.isTrue(this.isSelf, 'Participant is not self!')
+    }
+
+    public setVideoElement(element: HTMLElement | null): void {
+        this.videoElement = element
+    }
+
+    public getHasVideo(): boolean {
+        return !!this.videoElement
     }
 }
 
 type DestroyHandler = () => void
 
-interface MockParticipantSurfaceOptions extends AddParticipantSurfaceOptions {
+interface MockParticipantOptions extends AddConferenceParticipantOptions {
     onDestroy: DestroyHandler
 }

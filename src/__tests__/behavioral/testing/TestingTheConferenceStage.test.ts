@@ -98,9 +98,9 @@ export default class TestingTheConferenceStageTest extends AbstractSpruceFixture
     @test()
     protected async throwsIfTryingToAddParticipantBeforeEnteringStage() {
         await assert.doesThrowAsync(() =>
-            this.stageVc.addParticipantSurface({
+            this.stageVc.addParticipant({
                 id: 'participant-1',
-                element: {} as HTMLVideoElement,
+                videoElement: {} as HTMLVideoElement,
             })
         )
     }

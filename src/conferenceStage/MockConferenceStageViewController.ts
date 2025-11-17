@@ -1,9 +1,9 @@
 import { assert } from '@sprucelabs/test-utils'
+import MockConferenceParticipant from '../conferenceParticipant/MockConferenceParticipant'
 import {
-    AddParticipantSurfaceOptions,
+    AddConferenceParticipantOptions,
     ConnectionStatus,
 } from '../conferenceStage.types'
-import MockParticipantSurface from '../participantSurface/MockParticipantSurface'
 import ConferenceStageViewController from './ConferenceStage.vc'
 
 export default class MockConferenceStageViewController extends ConferenceStageViewController {
@@ -11,8 +11,8 @@ export default class MockConferenceStageViewController extends ConferenceStageVi
     private criticalError?: Error
     private didClearCriticalError = false
     private connectionStatus?: ConnectionStatus
-    private surfaceCount = 0
-    private surfaces: MockParticipantSurface[] = []
+    private participantCount = 0
+    private participants: MockConferenceParticipant[] = []
 
     public async enterConference(): Promise<void> {
         this.didEnterConference = true
@@ -30,40 +30,34 @@ export default class MockConferenceStageViewController extends ConferenceStageVi
         this.connectionStatus = status
     }
 
-    public getParticipantSurface(idOrIdx: number | string) {
+    public getParticipant(idOrIdx: number | string) {
         if (typeof idOrIdx === 'string') {
-            const match = this.surfaces.find((s) => s.id === idOrIdx)
-            assert.isTruthy(
-                match,
-                'No participant surface found with id: ' + idOrIdx
-            )
+            const match = this.participants.find((s) => s.id === idOrIdx)
+            assert.isTruthy(match, 'No participant found with id: ' + idOrIdx)
             return match
         }
 
-        const match = this.surfaces[idOrIdx]
-        assert.isTruthy(
-            match,
-            'No participant surface found at index: ' + idOrIdx
-        )
+        const match = this.participants[idOrIdx]
+        assert.isTruthy(match, 'No participant found at index: ' + idOrIdx)
         return match
     }
 
-    public async addParticipantSurface(
-        options: AddParticipantSurfaceOptions
-    ): Promise<MockParticipantSurface> {
-        this.surfaceCount++
+    public async addParticipant(
+        options: AddConferenceParticipantOptions
+    ): Promise<MockConferenceParticipant> {
+        this.participantCount++
         assert.isTruthy(
             this.didEnterConference,
-            `You must enter the conference before adding participant surfaces. Try "this.stageVc.enterConference()" before adding participants.`
+            `You must enter the conference before adding participants. Try "this.stageVc.enterConference()" before adding participants.`
         )
-        const surface = new MockParticipantSurface({
+        const participant = new MockConferenceParticipant({
             onDestroy: () => {
-                this.surfaceCount--
+                this.participantCount--
             },
             ...options,
         })
-        this.surfaces.push(surface)
-        return surface
+        this.participants.push(participant)
+        return participant
     }
 
     public assertDidEnterConference() {
@@ -95,11 +89,11 @@ export default class MockConferenceStageViewController extends ConferenceStageVi
         )
     }
 
-    public assertTotalParticipantSurfaces(expected: number) {
+    public assertTotalParticipants(expected: number) {
         assert.isEqual(
-            this.surfaceCount,
+            this.participantCount,
             expected,
-            `Expected ${expected} participant surfaces, but found ${this.surfaceCount}.`
+            `Expected ${expected} participants, but found ${this.participantCount}.`
         )
     }
 }

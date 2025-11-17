@@ -29,19 +29,19 @@ export declare namespace SpruceErrors.ConferenceStageControllers {
 export declare namespace SpruceErrors.ConferenceStageControllers {
 
 	
-	export interface AddParticipantSurfaceHandlerNotSet {
+	export interface AddParticipantHandlerNotSet {
 		
 	}
 
-	export interface AddParticipantSurfaceHandlerNotSetSchema extends SpruceSchema.Schema {
-		id: 'addParticipantSurfaceHandlerNotSet',
+	export interface AddParticipantHandlerNotSetSchema extends SpruceSchema.Schema {
+		id: 'addParticipantHandlerNotSet',
 		namespace: 'ConferenceStageControllers',
-		name: 'Add participant surface handler not set',
+		name: 'Add participant handler not set',
 		    fields: {
 		    }
 	}
 
-	export type AddParticipantSurfaceHandlerNotSetEntity = SchemaEntity<SpruceErrors.ConferenceStageControllers.AddParticipantSurfaceHandlerNotSetSchema>
+	export type AddParticipantHandlerNotSetEntity = SchemaEntity<SpruceErrors.ConferenceStageControllers.AddParticipantHandlerNotSetSchema>
 
 }
 
