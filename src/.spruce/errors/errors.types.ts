@@ -6,6 +6,35 @@ import * as SpruceSchema from '@sprucelabs/schema'
 
 
 
+
+export declare namespace SpruceErrors.ConferenceStageControllers {
+
+	
+	export interface ParticipantAlreadyExists {
+		
+			
+			'id': string
+	}
+
+	export interface ParticipantAlreadyExistsSchema extends SpruceSchema.Schema {
+		id: 'participantAlreadyExists',
+		namespace: 'ConferenceStageControllers',
+		name: 'Participant already exists',
+		    fields: {
+		            /** . */
+		            'id': {
+		                type: 'id',
+		                isRequired: true,
+		                options: undefined
+		            },
+		    }
+	}
+
+	export type ParticipantAlreadyExistsEntity = SchemaEntity<SpruceErrors.ConferenceStageControllers.ParticipantAlreadyExistsSchema>
+
+}
+
+
 export declare namespace SpruceErrors.ConferenceStageControllers {
 
 	

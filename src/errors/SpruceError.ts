@@ -15,8 +15,8 @@ export default class SpruceError extends BaseSpruceError<ErrorOptions> {
                 message = `This conference bridge has not been configured properly. Make sure to call setAddParticipantHandler(...) in your front-end component and that you have actually entered the conference using 'await this.conferenceStage.enterConference()' before adding participants.`
                 break
 
-            case 'ADD_PARTICIPANT_HANDLER_NOT_SET':
-                message = 'A Add participant handler not set just happened!'
+            case 'PARTICIPANT_ALREADY_EXISTS':
+                message = `That participant is already in the conference!`
                 break
 
             default:

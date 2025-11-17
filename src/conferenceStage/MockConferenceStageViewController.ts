@@ -4,6 +4,7 @@ import {
     AddConferenceParticipantOptions,
     ConnectionStatus,
 } from '../conferenceStage.types'
+import SpruceError from '../errors/SpruceError'
 import ConferenceStageViewController from './ConferenceStage.vc'
 
 export default class MockConferenceStageViewController extends ConferenceStageViewController {
@@ -31,14 +32,21 @@ export default class MockConferenceStageViewController extends ConferenceStageVi
     }
 
     public getParticipant(idOrIdx: number | string) {
+        const match = this._getParticipant(idOrIdx)
+        assert.isTruthy(
+            match,
+            `No participant found for id or index "${idOrIdx}".`
+        )
+        return match
+    }
+
+    private _getParticipant(idOrIdx: number | string) {
         if (typeof idOrIdx === 'string') {
             const match = this.participants.find((s) => s.id === idOrIdx)
-            assert.isTruthy(match, 'No participant found with id: ' + idOrIdx)
             return match
         }
 
         const match = this.participants[idOrIdx]
-        assert.isTruthy(match, 'No participant found at index: ' + idOrIdx)
         return match
     }
 
@@ -46,17 +54,29 @@ export default class MockConferenceStageViewController extends ConferenceStageVi
         options: AddConferenceParticipantOptions
     ): Promise<MockConferenceParticipant> {
         this.participantCount++
+
+        const { id } = options
+        if (this._getParticipant(id)) {
+            throw new SpruceError({
+                code: 'PARTICIPANT_ALREADY_EXISTS',
+                id,
+            })
+        }
+
         assert.isTruthy(
             this.didEnterConference,
             `You must enter the conference before adding participants. Try "this.stageVc.enterConference()" before adding participants.`
         )
+
         const participant = new MockConferenceParticipant({
             onDestroy: () => {
                 this.participantCount--
             },
             ...options,
         })
+
         this.participants.push(participant)
+
         return participant
     }
 

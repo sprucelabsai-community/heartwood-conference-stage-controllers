@@ -3,8 +3,15 @@ import {
     CardViewController,
 } from '@sprucelabs/heartwood-view-controllers'
 import { AbstractSpruceFixtureTest } from '@sprucelabs/spruce-test-fixtures'
-import { test, suite, assert, errorAssert } from '@sprucelabs/test-utils'
+import {
+    test,
+    suite,
+    assert,
+    errorAssert,
+    generateId,
+} from '@sprucelabs/test-utils'
 import MockConferenceStageViewController from '../../../conferenceStage/MockConferenceStageViewController'
+import { AddConferenceParticipantOptions } from '../../../conferenceStage.types'
 import conferenceStageAssert from '../../../conferenceStageAssert'
 
 @suite()
@@ -98,11 +105,30 @@ export default class TestingTheConferenceStageTest extends AbstractSpruceFixture
     @test()
     protected async throwsIfTryingToAddParticipantBeforeEnteringStage() {
         await assert.doesThrowAsync(() =>
-            this.stageVc.addParticipant({
+            this.addParticipant({
                 id: 'participant-1',
                 videoElement: {} as HTMLVideoElement,
             })
         )
+    }
+
+    @test()
+    protected async throwsIfAddingSameParticipantTwice() {
+        await this.stageVc.enterConference()
+
+        const id = generateId()
+        await this.addParticipant({ id })
+
+        const err = await assert.doesThrowAsync(() =>
+            this.addParticipant({ id })
+        )
+        errorAssert.assertError(err, 'PARTICIPANT_ALREADY_EXISTS', {
+            id,
+        })
+    }
+
+    private async addParticipant(options: AddConferenceParticipantOptions) {
+        return this.stageVc.addParticipant(options)
     }
 
     private renderStage() {

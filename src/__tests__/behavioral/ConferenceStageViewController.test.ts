@@ -149,6 +149,7 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
         const {
             handlers: { setLeaveConferenceHandler },
         } = this.render()
+
         let wasHit = false
         setLeaveConferenceHandler(async () => {
             wasHit = true
@@ -186,7 +187,7 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
 
         assert.isFalse(wasHit, 'enterConference handler was hit too early')
 
-        await this.vc.enterConference()
+        await this.enterConference()
 
         assert.isTrue(
             wasHit,
@@ -209,6 +210,10 @@ export default class ConferenceStageViewControllerTest extends AbstractSpruceFix
         })
 
         errorAssert.assertError(err, 'ADD_PARTICIPANT_HANDLER_NOT_SET')
+    }
+
+    private async enterConference() {
+        await this.vc.enterConference()
     }
 
     private clearCriticalError() {
