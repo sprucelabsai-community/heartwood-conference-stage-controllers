@@ -1,3 +1,7 @@
+## <small>7.0.1 (2025-11-18)</small>
+
+* patch: readme and test bump ([c7e3a7a](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/c7e3a7a))
+
 ## 2.0.0 (2025-11-18)
 
 * Merge branch 'master' of github.com:sprucelabsai-community/heartwood-conference-stage-controllers ([89b0e73](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/89b0e73))
