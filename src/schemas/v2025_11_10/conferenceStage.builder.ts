@@ -113,6 +113,14 @@ export default buildSchema({
                                     'ConferenceStageTypes.SetGenericStateChangeHandler',
                             },
                         },
+                        setClickRetryOnCriticalErrorHandler: {
+                            type: 'raw',
+                            isRequired: true,
+                            options: {
+                                valueType:
+                                    'ConferenceStageTypes.SetGenericStateChangeHandler',
+                            },
+                        },
                     },
                 }),
             },
