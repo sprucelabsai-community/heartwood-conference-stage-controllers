@@ -1,3 +1,8 @@
+## 2.0.0 (2025-11-18)
+
+* Merge branch 'master' of github.com:sprucelabsai-community/heartwood-conference-stage-controllers ([89b0e73](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/89b0e73))
+* major: upgrade and click retry handler ([ad37c5f](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/ad37c5f))
+
 ## 1.0.0 (2025-11-18)
 
 * patch: better error reporting ([21d5f7b](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/21d5f7b))
