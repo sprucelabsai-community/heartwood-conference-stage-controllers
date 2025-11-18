@@ -188,9 +188,9 @@ export default class TestingParticipantTest extends AbstractSpruceFixtureTest {
     protected async canAssertPassedElement() {
         const element = {} as HTMLElement
         const participant = await this.addParticipant({ videoElement: element })
-        participant.assertElementEquals(element)
+        participant.assertVideoElementEquals(element)
         assert.doesThrow(() =>
-            participant.assertElementEquals({} as HTMLElement)
+            participant.assertVideoElementEquals({} as HTMLElement)
         )
     }
 
@@ -258,6 +258,20 @@ export default class TestingParticipantTest extends AbstractSpruceFixtureTest {
             name,
             'Name did not come back right'
         )
+    }
+
+    @test()
+    protected async settingVideoElementTwiceThrows() {
+        const participant = await this.addParticipant()
+        assert.doesThrow(() => participant.setVideoElement({} as HTMLElement))
+    }
+
+    @test()
+    protected async canAssertVideoElementRemoved() {
+        const participant = await this.addParticipant()
+        assert.doesThrow(() => participant.assertNoVideoElement())
+        participant.setVideoElement(null)
+        participant.assertNoVideoElement()
     }
 
     private getParticipant(id: string) {

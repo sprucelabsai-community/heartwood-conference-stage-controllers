@@ -103,11 +103,18 @@ export default class MockConferenceParticipant
         )
     }
 
-    public assertElementEquals(element: HTMLElement) {
+    public assertVideoElementEquals(element: HTMLElement) {
         assert.isEqual(
             this.videoElement,
             element,
             'HTMLElement does not match!'
+        )
+    }
+
+    public assertNoVideoElement() {
+        assert.isFalsy(
+            this.videoElement,
+            'Video element is set and should not be!'
         )
     }
 
@@ -120,6 +127,9 @@ export default class MockConferenceParticipant
     }
 
     public setVideoElement(element: HTMLElement | null): void {
+        if (element) {
+            assert.isFalsy(this.videoElement, 'Video element is already set!')
+        }
         this.videoElement = element
     }
 
