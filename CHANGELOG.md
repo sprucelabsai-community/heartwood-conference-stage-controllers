@@ -1,3 +1,8 @@
+## <small>7.0.2 (2025-11-29)</small>
+
+* chore(auto-upgrade): Upgrade Tests Passed [auto-merge] ([c714b48](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/c714b48))
+* chore(auto-upgrade): upgraded packages [upgrade-all] ([97fb22c](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/97fb22c))
+
 ## <small>7.0.1 (2025-11-18)</small>
 
 * patch: readme and test bump ([c7e3a7a](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/c7e3a7a))
