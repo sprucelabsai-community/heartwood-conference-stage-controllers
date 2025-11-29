@@ -7,9 +7,7 @@ import {
     VideoStatus,
 } from '../conferenceStage.types'
 
-export default class MockConferenceParticipant
-    implements ConferenceParticipant
-{
+export default class MockConferenceParticipant implements ConferenceParticipant {
     public id: string
     private destroyHandler: DestroyHandler
     private name?: string
