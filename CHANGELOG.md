@@ -1,3 +1,8 @@
+## 8.1.0 (2025-12-01)
+
+* Merge branch 'master' of github.com:sprucelabsai-community/heartwood-conference-stage-controllers ([5966d3e](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/5966d3e))
+* minor: can assert for specific error ([7ab4c2b](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/7ab4c2b))
+
 ## <small>8.0.1 (2025-12-01)</small>
 
 * Merge branch 'master' of github.com:sprucelabsai-community/heartwood-conference-stage-controllers ([2a986ec](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/2a986ec))
