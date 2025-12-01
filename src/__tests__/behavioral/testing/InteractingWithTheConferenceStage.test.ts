@@ -21,6 +21,7 @@ export default class InteractingWithTheConferenceStageTest extends AbstractSpruc
     private onJoinOptions?: OnJoinOptions
     private deviceError?: SpruceError
     private deviceChangeOptions?: OnDeviceChangeOptions
+    private didTriggerOnLeave = true
 
     protected async beforeEach(): Promise<void> {
         await super.beforeEach()
@@ -38,6 +39,9 @@ export default class InteractingWithTheConferenceStageTest extends AbstractSpruc
                 onDeviceChange: async (options) => {
                     this.deviceChangeOptions = options
                 },
+                onLeave: async () => {
+                    this.didTriggerOnLeave = true
+                },
             }
         )
     }
@@ -46,7 +50,7 @@ export default class InteractingWithTheConferenceStageTest extends AbstractSpruc
     protected async simulateClickJoinThrowsWithMissing() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
-            conferenceStageInteractor.simulateClickJoin()
+            conferenceStageInteractor.clickJoin()
         )
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
             parameters: ['stageVc'],
@@ -55,21 +59,13 @@ export default class InteractingWithTheConferenceStageTest extends AbstractSpruc
 
     @test()
     protected async canSimulateJoin() {
-        await conferenceStageInteractor.simulateClickJoin(this.stageVc)
+        await conferenceStageInteractor.clickJoin(this.stageVc)
         assert.isTrue(this.didTriggerOnJoin, 'Join handler was not hit!')
     }
 
     @test()
     protected async canPassDeviceIdsToJoinHandler() {
-        const expected = {
-            audioInputId: generateId(),
-            audioOutputId: generateId(),
-            videoDeviceId: generateId(),
-        }
-        await conferenceStageInteractor.simulateClickJoin(
-            this.stageVc,
-            expected
-        )
+        const expected = await this.clickJoin()
 
         assert.isEqualDeep(
             this.onJoinOptions,
@@ -92,14 +88,7 @@ export default class InteractingWithTheConferenceStageTest extends AbstractSpruc
 
     @test()
     protected async canSimulateDeviceError() {
-        const expected = new SpruceError({
-            code: 'DEVICE_ERROR',
-        })
-
-        await conferenceStageInteractor.simulateDeviceError(
-            this.stageVc,
-            expected
-        )
+        const expected = await this.simulateDeviceError()
 
         assert.isEqualDeep(
             this.deviceError,
@@ -112,7 +101,7 @@ export default class InteractingWithTheConferenceStageTest extends AbstractSpruc
     protected async simulateDeviceChangeThrowsWithMissing() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
-            conferenceStageInteractor.simulateDeviceChange()
+            conferenceStageInteractor.changeDevice()
         )
 
         errorAssert.assertError(err, 'MISSING_PARAMETERS', {
@@ -122,21 +111,87 @@ export default class InteractingWithTheConferenceStageTest extends AbstractSpruc
 
     @test()
     protected async canSimulateDeviceChange() {
-        const expected: OnDeviceChangeOptions = {
-            audioInputId: generateId(),
-            audioOutputId: generateId(),
-            videoDeviceId: generateId(),
-        }
-
-        await conferenceStageInteractor.simulateDeviceChange(
-            this.stageVc,
-            expected
-        )
+        const expected: OnDeviceChangeOptions =
+            await this.simulateDeviceChange()
 
         assert.isEqualDeep(
             this.deviceChangeOptions,
             expected,
             'Device change options passed to onDeviceChange do not match!'
         )
+    }
+
+    @test()
+    protected async clickLeaveThrowsWithMissing() {
+        const err = await assert.doesThrowAsync(() =>
+            //@ts-ignore
+            conferenceStageInteractor.clickLeave()
+        )
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['stageVc'],
+        })
+    }
+
+    @test()
+    protected async canClickLeave() {
+        await this.clickLeave()
+        assert.isTrue(this.didTriggerOnLeave, 'Leave handler was not hit!')
+    }
+
+    @test()
+    protected async clicksThrowWhenNoHandlerSet() {
+        this.stageVc = this.views.Controller(
+            'conference-stage-controllers.conference-stage',
+            {}
+        )
+
+        await assert.doesThrowAsync(() => this.clickJoin(), 'onJoin')
+        await assert.doesThrowAsync(() => this.clickLeave(), 'onLeave')
+        await assert.doesThrowAsync(
+            () => this.simulateDeviceChange(),
+            'onDeviceChange'
+        )
+
+        await assert.doesThrowAsync(
+            () => this.simulateDeviceError(),
+            'onDeviceError'
+        )
+    }
+
+    private async simulateDeviceError() {
+        const expected = new SpruceError({
+            code: 'DEVICE_ERROR',
+        })
+
+        await conferenceStageInteractor.simulateDeviceError(
+            this.stageVc,
+            expected
+        )
+        return expected
+    }
+
+    private async clickJoin() {
+        const expected = {
+            audioInputId: generateId(),
+            audioOutputId: generateId(),
+            videoDeviceId: generateId(),
+        }
+        await conferenceStageInteractor.clickJoin(this.stageVc, expected)
+        return expected
+    }
+
+    private async clickLeave() {
+        await conferenceStageInteractor.clickLeave(this.stageVc)
+    }
+
+    private async simulateDeviceChange() {
+        const expected: OnDeviceChangeOptions = {
+            audioInputId: generateId(),
+            audioOutputId: generateId(),
+            videoDeviceId: generateId(),
+        }
+
+        await conferenceStageInteractor.changeDevice(this.stageVc, expected)
+        return expected
     }
 }
