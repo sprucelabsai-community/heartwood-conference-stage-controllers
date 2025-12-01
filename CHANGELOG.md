@@ -1,3 +1,8 @@
+## <small>8.0.1 (2025-12-01)</small>
+
+* Merge branch 'master' of github.com:sprucelabsai-community/heartwood-conference-stage-controllers ([2a986ec](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/2a986ec))
+* patch: device audio output requried (missed the type last time) ([1a209aa](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/1a209aa))
+
 ## 8.0.0 (2025-12-01)
 
 * Merge branch 'master' of github.com:sprucelabsai-community/heartwood-conference-stage-controllers ([62ae2e0](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/62ae2e0))
