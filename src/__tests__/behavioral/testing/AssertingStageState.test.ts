@@ -29,12 +29,25 @@ export default class AssertingStageStateTest extends AbstractSpruceFixtureTest {
     }
 
     @test()
+    protected async assertDidNotEnterConferenceThrowsWithMissing() {
+        const err = assert.doesThrow(() =>
+            //@ts-ignore
+            conferenceStageAssert.didNotEnterConference()
+        )
+
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['stageVc'],
+        })
+    }
+
+    @test()
     protected async throwsIfDidNotEnterConference() {
         assert.doesThrow(
             () => conferenceStageAssert.didEnterConference(this.stageVc),
             'enterConference'
         )
         assert.doesThrow(() => this.stageVc.assertDidEnterConference())
+        conferenceStageAssert.didNotEnterConference(this.stageVc)
     }
 
     @test()
@@ -42,6 +55,9 @@ export default class AssertingStageStateTest extends AbstractSpruceFixtureTest {
         await this.stageVc.enterConference()
         conferenceStageAssert.didEnterConference(this.stageVc)
         this.stageVc.assertDidEnterConference()
+        assert.doesThrow(() =>
+            conferenceStageAssert.didNotEnterConference(this.stageVc)
+        )
     }
 
     @test()
@@ -153,9 +169,26 @@ export default class AssertingStageStateTest extends AbstractSpruceFixtureTest {
             conferenceStageAssert.didLeaveConference(this.stageVc)
         )
 
+        conferenceStageAssert.didNotLeaveConference(this.stageVc)
+
         await this.stageVc.leaveConference()
 
+        assert.doesThrow(() =>
+            conferenceStageAssert.didNotLeaveConference(this.stageVc)
+        )
+
         conferenceStageAssert.didLeaveConference(this.stageVc)
+    }
+
+    @test()
+    protected async didNotLeaveConferenceThrowsWithMissing() {
+        const err = assert.doesThrow(() =>
+            //@ts-ignore
+            conferenceStageAssert.didNotLeaveConference()
+        )
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['stageVc'],
+        })
     }
 
     private setConnectionStatus(status: ConnectionStatus) {

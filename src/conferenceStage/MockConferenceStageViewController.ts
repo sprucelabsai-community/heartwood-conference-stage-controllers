@@ -93,6 +93,13 @@ export default class MockConferenceStageViewController extends ConferenceStageVi
         )
     }
 
+    public assertDidNotEnterConference() {
+        assert.isFalse(
+            this.didEnterConference,
+            `You entered the conference too soon!`
+        )
+    }
+
     public assertHasCriticalError() {
         assert.isTruthy(
             this.criticalError,
@@ -119,6 +126,13 @@ export default class MockConferenceStageViewController extends ConferenceStageVi
         assert.isTrue(
             this.didLeaveConference,
             `You did not leave the conference! Try "this.stageVc.leaveConference()"`
+        )
+    }
+
+    public assertDidNotLeaveConference() {
+        assert.isFalse(
+            this.didLeaveConference,
+            `You left the conference too soon!`
         )
     }
 

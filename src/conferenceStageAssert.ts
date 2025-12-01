@@ -43,6 +43,12 @@ const conferenceStageAssert = {
         stage.assertDidEnterConference()
     },
 
+    didNotEnterConference(stageVc: ViewController<ConferenceStage>) {
+        assertOptions({ stageVc }, ['stageVc'])
+        const stage = stageVc as MockConferenceStageViewController
+        stage.assertDidNotEnterConference()
+    },
+
     hasCriticalError(stageVc: ViewController<ConferenceStage>) {
         assertOptions({ stageVc }, ['stageVc'])
         const stage = stageVc as MockConferenceStageViewController
@@ -59,6 +65,12 @@ const conferenceStageAssert = {
         assertOptions({ stageVc }, ['stageVc'])
         const stage = stageVc as MockConferenceStageViewController
         stage.assertDidLeaveConference()
+    },
+
+    didNotLeaveConference(stageVc: ViewController<ConferenceStage>) {
+        assertOptions({ stageVc }, ['stageVc'])
+        const stage = stageVc as MockConferenceStageViewController
+        stage.assertDidNotLeaveConference()
     },
 
     cardRendersConferenceStage(cardVc: ViewController<Card>) {
