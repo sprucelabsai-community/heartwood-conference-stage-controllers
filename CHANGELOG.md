@@ -1,3 +1,7 @@
+## 7.1.0 (2025-12-01)
+
+* minor: can assert did not enter and did not leave conferenc ([00427b1](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/00427b1))
+
 ## <small>7.0.4 (2025-12-01)</small>
 
 * patch: bump ([a035e53](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/a035e53))
