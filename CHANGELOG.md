@@ -1,3 +1,8 @@
+## 8.0.0 (2025-12-01)
+
+* Merge branch 'master' of github.com:sprucelabsai-community/heartwood-conference-stage-controllers ([62ae2e0](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/62ae2e0))
+* major: interactor signature change, can now simulate clicking leave ([aa22d75](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/aa22d75))
+
 ## 7.1.0 (2025-12-01)
 
 * minor: can assert did not enter and did not leave conferenc ([00427b1](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/00427b1))
