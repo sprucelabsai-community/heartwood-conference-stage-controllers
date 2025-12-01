@@ -100,11 +100,19 @@ export default class MockConferenceStageViewController extends ConferenceStageVi
         )
     }
 
-    public assertHasCriticalError() {
+    public assertHasCriticalError(error?: Error) {
         assert.isTruthy(
             this.criticalError,
             `You do not have a critical error! Try "this.stageVc.setCriticalError(...)"`
         )
+
+        if (error) {
+            assert.isEqual(
+                this.criticalError,
+                error,
+                `Your critical error does not match the expected error.`
+            )
+        }
     }
 
     public assertClearedCriticalError() {

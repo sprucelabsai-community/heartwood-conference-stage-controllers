@@ -91,6 +91,20 @@ export default class AssertingStageStateTest extends AbstractSpruceFixtureTest {
     }
 
     @test()
+    protected async canAssertHasSpecificCriticalError() {
+        const criticalErr = new Error('Critical failure!')
+        this.stageVc.setCriticalError(criticalErr)
+
+        conferenceStageAssert.hasCriticalError(this.stageVc, criticalErr)
+        assert.doesThrow(() =>
+            conferenceStageAssert.hasCriticalError(
+                this.stageVc,
+                new Error('Another error')
+            )
+        )
+    }
+
+    @test()
     protected async assertClearedCriticalErrorThrowsWithMissing() {
         const err = assert.doesThrow(() =>
             //@ts-ignore

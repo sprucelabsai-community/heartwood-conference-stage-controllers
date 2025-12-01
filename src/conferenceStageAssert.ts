@@ -49,10 +49,10 @@ const conferenceStageAssert = {
         stage.assertDidNotEnterConference()
     },
 
-    hasCriticalError(stageVc: ViewController<ConferenceStage>) {
+    hasCriticalError(stageVc: ViewController<ConferenceStage>, error?: Error) {
         assertOptions({ stageVc }, ['stageVc'])
         const stage = stageVc as MockConferenceStageViewController
-        stage.assertHasCriticalError()
+        stage.assertHasCriticalError(error)
     },
 
     didClearCriticalError(stageVc: ViewController<ConferenceStage>) {
