@@ -136,6 +136,28 @@ export default class AssertingStageStateTest extends AbstractSpruceFixtureTest {
         )
     }
 
+    @test()
+    protected async didLeaveConferenceThrowsWithMissing() {
+        const err = assert.doesThrow(() =>
+            //@ts-ignore
+            conferenceStageAssert.didLeaveConference()
+        )
+        errorAssert.assertError(err, 'MISSING_PARAMETERS', {
+            parameters: ['stageVc'],
+        })
+    }
+
+    @test()
+    protected async canAssertLeftConference() {
+        assert.doesThrow(() =>
+            conferenceStageAssert.didLeaveConference(this.stageVc)
+        )
+
+        await this.stageVc.leaveConference()
+
+        conferenceStageAssert.didLeaveConference(this.stageVc)
+    }
+
     private setConnectionStatus(status: ConnectionStatus) {
         this.stageVc.setConnectionStatus(status)
     }

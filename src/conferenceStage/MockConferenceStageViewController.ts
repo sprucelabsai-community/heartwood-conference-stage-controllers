@@ -9,6 +9,7 @@ import ConferenceStageViewController from './ConferenceStage.vc'
 
 export default class MockConferenceStageViewController extends ConferenceStageViewController {
     private didEnterConference = false
+    private didLeaveConference = false
     private criticalError?: Error
     private didClearCriticalError = false
     private connectionStatus?: ConnectionStatus
@@ -29,6 +30,11 @@ export default class MockConferenceStageViewController extends ConferenceStageVi
 
     public setConnectionStatus(status: ConnectionStatus): void {
         this.connectionStatus = status
+    }
+
+    public async leaveConference(): Promise<void> {
+        this.didLeaveConference = true
+        await super.leaveConference()
     }
 
     public getParticipant(idOrIdx: number | string) {
@@ -106,6 +112,13 @@ export default class MockConferenceStageViewController extends ConferenceStageVi
             this.connectionStatus,
             expected,
             `Connection status does not equal expected. Try "this.stageVc.setConnectionStatus('${expected}')"`
+        )
+    }
+
+    public assertDidLeaveConference() {
+        assert.isTrue(
+            this.didLeaveConference,
+            `You did not leave the conference! Try "this.stageVc.leaveConference()"`
         )
     }
 

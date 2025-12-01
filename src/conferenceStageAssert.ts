@@ -55,6 +55,12 @@ const conferenceStageAssert = {
         stage.assertClearedCriticalError()
     },
 
+    didLeaveConference(stageVc: ViewController<ConferenceStage>) {
+        assertOptions({ stageVc }, ['stageVc'])
+        const stage = stageVc as MockConferenceStageViewController
+        stage.assertDidLeaveConference()
+    },
+
     cardRendersConferenceStage(cardVc: ViewController<Card>) {
         assert.isTrue(
             wasBeforeEachRun,
