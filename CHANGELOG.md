@@ -1,3 +1,8 @@
+## <small>7.0.4 (2025-12-01)</small>
+
+* patch: bump ([a035e53](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/a035e53))
+* patch: leave conference ([4e4dcc8](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/4e4dcc8))
+
 ## <small>7.0.3 (2025-11-29)</small>
 
 * chore(auto-upgrade): Upgrade Tests Passed [auto-merge] ([7bc4cae](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/7bc4cae))
