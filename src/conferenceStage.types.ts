@@ -46,7 +46,7 @@ export interface AddConferenceParticipantOptions {
 export interface OnJoinOptions {
     videoDeviceId: string | null
     audioInputId: string | null
-    audioOutputId: string | null
+    audioOutputId: string
 }
 
 export type OnDeviceChangeOptions = Partial<OnJoinOptions>
