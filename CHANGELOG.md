@@ -1,3 +1,8 @@
+## <small>8.1.20 (2026-02-18)</small>
+
+* chore(auto-upgrade): Upgrade Tests Passed [auto-merge] ([fcc735d](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/fcc735d))
+* chore(auto-upgrade): upgraded packages [upgrade-all] ([b994543](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/b994543))
+
 ## <small>8.1.19 (2026-02-18)</small>
 
 * chore(auto-upgrade): Upgrade Tests Passed [auto-merge] ([1f49ce4](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/1f49ce4))
