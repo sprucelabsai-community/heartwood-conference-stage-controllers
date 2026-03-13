@@ -1,3 +1,8 @@
+## <small>8.1.30 (2026-03-13)</small>
+
+* chore(auto-upgrade): Upgrade Tests Passed [auto-merge] ([aebe791](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/aebe791))
+* chore(auto-upgrade): upgraded packages [upgrade-all] ([d665435](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/d665435))
+
 ## <small>8.1.29 (2026-03-13)</small>
 
 * chore(auto-upgrade): Upgrade Tests Passed [auto-merge] ([4abdbff](https://github.com/sprucelabsai-community/heartwood-conference-stage-controllers/commit/4abdbff))
